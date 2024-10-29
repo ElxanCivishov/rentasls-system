@@ -24,7 +24,7 @@ const Statistics = () => {
             </div>
 
             {selectedTab === tabOptions[1] ? (
-                buildings.map(({ keyword, id }) => <BuildingChart company={keyword} key={id} />)
+                buildings.map(({ keyword, id }) => <BuildingChart keyword={keyword} key={id} />)
             ) : (
                 <>
                     <AllBuildingsChart />

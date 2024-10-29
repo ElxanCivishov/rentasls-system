@@ -15,6 +15,6 @@ function getFullNameFromFields(fields: string[]): string {
  * @returns {string} The full name of the person, concatenated from their name, surname, and patronymic.
  */
 export function getFullName(info: TUser): string {
-    const { name = "", surname = "", patronymic = "" } = info;
-    return getFullNameFromFields([surname, name, patronymic]);
+    const { name = "" } = info;
+    return getFullNameFromFields([name]);
 }
