@@ -1,0 +1,47 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Public Sans";
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--main);
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(169, 169, 169);
+}
+
+a {
+    all: unset;
+}
+
+button {
+    all: unset;
+    cursor: pointer;
+    user-select: none;
+}

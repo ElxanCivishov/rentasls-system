@@ -1,0 +1,151 @@
+.date-picker-wrapper {
+    position: relative;
+    height: 3rem;
+
+    .ant-picker {
+        height: 100%;
+        width: 100%;
+
+        .ant-picker-input {
+            padding-top: 10px;
+            .ant-picker-suffix {
+                margin-top: -10px;
+            }
+        }
+
+        &.ant-picker-range {
+            .ant-picker-input {
+                padding-top: 0px;
+            }
+        }
+    }
+
+    .date-error {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 0px;
+    }
+}
+
+.field-error {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ant-calendar-range-picker-separator:after {
+    content: "to";
+}
+
+.custom-radio-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    padding: 0.7rem;
+    border: 1px solid var(--gray-300);
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+    h3 {
+        font-weight: 500;
+        font-size: 1rem;
+        color: #5d5a6f;
+    }
+
+    .ant-radio-inner {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+}
+
+.custom-switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    background-color: white;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+
+    &.bordered {
+        border: 1px solid var(--gray-300);
+    }
+
+    h3 {
+        font-weight: 500;
+        font-size: 1rem;
+        color: #5d5a6f;
+    }
+
+    .switch {
+        height: 30px;
+        width: 65px;
+
+        padding: 4px 2px;
+
+        .ant-switch-handle {
+            top: 6px;
+        }
+    }
+}
+
+.ql-editor {
+    font-size: 17px !important;
+    min-height: 60px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.quill-error {
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+.ql-toolbar.ql-snow {
+    border: 1px solid var(--gray-300) !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.ql-container.ql-snow {
+    height: auto !important;
+    border: 1px solid var(--gray-300) !important;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: none !important;
+}
+
+.quill {
+    word-break: break-word;
+    background-color: white;
+}
+
+.quill-footer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.select-input .ant-select-selection-item {
+    padding-top: 9px !important;
+}
+
+.ant-select-selection-item {
+    .ant-radio-wrapper {
+        display: none !important;
+    }
+}

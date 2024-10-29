@@ -1,0 +1,40 @@
+import { TRoomDetails } from "@/service/RoomsService";
+
+export const data: TRoomDetails[] = Array.from({ length: 100 }).map((_, index) => ({
+    id: "01J9ZZBW9FHRZEHJW7M2FPRE0W",
+    floor_id: "01J9ZZBW30HKWF9YB7679JJWE7",
+    director: "Director 1",
+    company_name: "As_texnika Co. Room 1",
+    official_payment: 2896.0,
+    unofficial_payment: 783.0,
+    voen_or_fin: "s4tOBcVKrD",
+    area: 185.0,
+    total_price: 6168.0,
+    contract_id: "01J9ZZBDCK6GTY0176X7TFSSTF",
+    room_number: `00${index + 1}`,
+    room_type: "Office",
+    month: 10,
+    year: 2024,
+    debt: 19.0,
+    total_debt: 408.0,
+    price: 3113.0,
+    key_by_company:
+        "eyJpdiI6InN1WklnQTU0dDhZNXgxa2t6bHVxV0E9PSIsInZhbHVlIjoiUlNhbS9nS1AyZEpwT084NG82U1BGZz09IiwibWFjIjoiYzBiZjA3MDhiYjMxMzIzZDU4NjFmM2VmY2IzMTcxODFjZmNlNWMzZDM5ZDU3NTYzOWYxZDUwMmE0M2FhNGFiZSIsInRhZyI6IiJ9",
+    created_at: "2024-10-12T09:01:17.000000Z",
+    updated_at: "2024-10-12T09:01:17.000000Z",
+    floor: {
+        id: "01J9ZZBW30HKWF9YB7679JJWE7",
+        building_id: "01J9ZZBD9SVP2R8RNRS4RCNH09",
+        name: "M\u0259rt\u0259b\u0259 1",
+        floor_number: 1,
+        created_at: "2024-10-12T09:01:17.000000Z",
+        updated_at: "2024-10-12T09:01:17.000000Z",
+    },
+    contract: {
+        id: "01J9ZZBDCK6GTY0176X7TFSSTF",
+        contract_number: "219807927741",
+        created_at: "2024-10-12T09:01:02.000000Z",
+        updated_at: "2024-10-12T09:01:02.000000Z",
+    },
+    uuid: `uuid${index + 1}`,
+}));

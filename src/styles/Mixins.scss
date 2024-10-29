@@ -1,0 +1,21 @@
+@mixin grid-layout($columns) {
+    display: grid;
+    grid-template-columns: repeat(#{$columns}, 1fr);
+    gap: 1rem;
+}
+
+.grid-data-1 {
+    @include grid-layout(1);
+}
+
+.grid-data-2 {
+    @include grid-layout(2);
+}
+
+.grid-data-3 {
+    @include grid-layout(3);
+}
+
+.grid-data-4 {
+    @include grid-layout(4);
+}

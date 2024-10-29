@@ -1,0 +1,233 @@
+$collapsed-width: 3.5rem;
+$expanded-width: 14rem;
+
+.ant-layout {
+    position: sticky;
+    top: 0;
+    height: 100%;
+    z-index: 20;
+    margin: 0 0.5rem 0 0;
+    user-select: none;
+    background-color: transparent;
+    flex: none;
+
+    .ant-layout-sider {
+        background-color: var(--main) !important;
+    }
+
+    .ant-menu.ant-menu-root {
+        overflow-y: auto;
+        height: 80dvh;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+.ant-menu-vertical .ant-menu-item,
+.ant-menu-inline .ant-menu-item {
+    margin-block: 1rem;
+}
+
+.ant-menu-title-content {
+    color: white;
+    user-select: none;
+}
+
+.ant-menu-submenu {
+    // margin-block: 1rem;
+
+    .ant-menu-sub {
+        background-color: var(--main) !important;
+        .ant-menu-item:hover {
+            &:not(.ant-menu-item-selected) {
+                background-color: rgba(0, 0, 0, 0.06);
+
+                .ant-menu-title-content {
+                    color: white !important;
+                }
+            }
+
+            &:has(.ant-menu-item-selected) {
+                background-color: rgba(0, 0, 0, 0.06);
+
+                .ant-menu-title-content {
+                    color: var(--main) !important;
+                    font-weight: 700;
+                    font-size: 2rem;
+                }
+            }
+        }
+
+        .ant-menu-item-selected {
+            background-color: white !important;
+        }
+
+        .ant-menu-item-active {
+            span {
+                color: var(--main);
+            }
+        }
+    }
+
+    .ant-menu-submenu-title {
+        gap: 0.75rem;
+        padding-left: 24px !important;
+        padding-top: 3px;
+
+        .ant-menu-submenu-arrow {
+            color: white;
+            top: 55%;
+        }
+    }
+}
+
+.ant-menu-light.ant-menu-root.ant-menu-inline,
+.ant-menu-light > .ant-menu.ant-menu-root.ant-menu-inline,
+.ant-menu-light.ant-menu-root.ant-menu-vertical,
+.ant-menu-light > .ant-menu.ant-menu-root.ant-menu-vertical {
+    border-inline-end: none !important;
+    border: none !important;
+}
+
+.ant-menu-item {
+    margin-block: 1rem;
+    padding-left: 1.0625rem !important;
+
+    .ant-menu-item-icon {
+        padding: 0.5rem;
+    }
+}
+
+.ant-menu,
+.ant-layout-sider,
+.ant-layout-sider-children {
+    background-color: var(--main);
+}
+
+.ant-menu .ant-menu-item-selected {
+    background-color: white;
+
+    .ant-menu-title-content {
+        color: var(--main);
+    }
+}
+
+.ant-menu-submenu-inline .ant-menu-item {
+    padding-left: 60px !important;
+}
+
+.ant-menu-item-selected .sidebar-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: 0.5s;
+}
+
+@mixin sider-width($width: $expanded-width) {
+    width: $width !important;
+    flex: 0 0 $width !important;
+    max-width: $width !important;
+    min-width: $width !important;
+}
+
+.custom-sider {
+    &.collapsed {
+        @include sider-width($collapsed-width);
+
+        .ant-menu-submenu .ant-menu-submenu-title {
+            padding-left: 14px !important;
+        }
+
+        .ant-menu-item {
+            padding-left: 0px !important;
+
+            .sidebar-icon {
+                margin-left: 6px;
+                margin-top: 3px;
+            }
+        }
+    }
+
+    &.expanded {
+        @include sider-width($expanded-width);
+    }
+}
+
+.logo-container {
+    position: relative;
+    height: 4rem;
+    width: 100%;
+    padding: 2.5rem 1.3rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--main);
+
+    &--active {
+        gap: 0.5rem;
+        justify-content: flex-start;
+    }
+
+    .logo {
+        cursor: pointer;
+        padding: 3px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background-color: white;
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        -ms-border-radius: 12px;
+        -o-border-radius: 12px;
+
+        img {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+        }
+    }
+
+    .logo-text {
+        color: white;
+        font-size: 1.3rem;
+        line-height: 1rem;
+    }
+}
+
+.ant-menu.ant-menu-root {
+    > .ant-menu-item:last-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+
+        &::before {
+            position: absolute;
+            height: 1.2px;
+            width: 100%;
+            background-color: var(--gray-200);
+            top: 0;
+            content: "";
+        }
+    }
+}
+
+.menu-divider {
+    margin: 1.5rem 0.3rem;
+    padding: 0 1rem;
+    height: 0.5px;
+    background-color: var(--gray-200);
+}
+
+.menu-button {
+    position: absolute;
+    right: -1.5rem;
+    top: 4rem;
+}

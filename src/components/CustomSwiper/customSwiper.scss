@@ -1,0 +1,44 @@
+.customSwiper {
+    padding: 0 0 2.8rem 0;
+    position: relative;
+    padding-top: 2rem;
+
+    .commentCard {
+        display: flex;
+        justify-content: space-between;
+        height: 650px;
+        cursor: pointer;
+        img {
+            object-fit: cover;
+            width: 100%;
+        }
+    }
+
+    .mySwiper {
+        position: static;
+    }
+
+    .swiper-pagination-bullet {
+        width: 8px;
+        height: 8px;
+        text-align: center;
+        background: black;
+        margin-bottom: 1rem;
+        border-radius: 1px;
+    }
+
+    .swiper-pagination-bullet-active {
+        color: #fff;
+        background: black;
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .customSwiper {
+        .commentCard {
+            height: 400px;
+        }
+    }
+}

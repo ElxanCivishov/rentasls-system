@@ -1,0 +1,62 @@
+.map-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    height: 100%;
+
+    .actions,
+    .floors {
+        display: flex;
+        gap: 1rem;
+        button {
+            width: max-content;
+            height: max-content;
+        }
+    }
+
+    .active {
+        stroke: #3c7167;
+    }
+
+    text.active {
+        stroke: none;
+    }
+
+    .map-details-wrapper {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+
+        .svg {
+            width: 100%;
+            overflow: auto;
+        }
+
+        .details {
+            min-width: 400px;
+        }
+    }
+
+    @media (max-width: 1000px) {
+        .actions,
+        .floors {
+            flex-wrap: wrap;
+        }
+
+        .svg {
+            overflow: auto;
+            svg {
+                min-width: 1000px;
+            }
+        }
+
+        .map-details-wrapper {
+            flex-direction: column;
+
+            .details {
+                min-width: auto !important;
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+$labelColor: #2d3748;
+
+.search-and-new {
+    .float-label {
+        overflow: hidden;
+        width: 100%;
+
+        .label {
+            color: $labelColor;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .ant-select {
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+}

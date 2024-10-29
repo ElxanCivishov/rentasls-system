@@ -1,0 +1,70 @@
+$labelColor: #a0aec0;
+
+$labelColor: #a0aec0;
+
+.float-label {
+    min-height: 3rem;
+    height: 3rem;
+    min-height: 3rem;
+    height: 3rem;
+    position: relative;
+    width: 100%;
+    > input,
+    .ant-input-number {
+        height: 100%;
+    }
+
+    .label {
+        color: $labelColor;
+        font-size: 12px;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 12px;
+        top: 50%;
+        transform: translate(0px, -50%);
+        transition: 0.2s ease all;
+    }
+
+    .label-float {
+        top: 12px;
+    }
+
+    > div,
+    .ant-input-number {
+        width: 100%;
+    }
+
+    .specific-text {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        font-size: 16px;
+        color: $labelColor;
+    }
+
+    .ant-input,
+    .ant-input-number {
+        padding: 10px 11px 0px 11px;
+    }
+
+    .ant-input-number {
+        .ant-input-number-input {
+            padding-top: 10px;
+        }
+    }
+
+    &:not(:has(.label-float)) {
+        .ant-input,
+        .ant-input-number {
+            padding-top: 5px;
+        }
+    }
+}
+
+.float-label.error {
+    label {
+        color: var(--error);
+    }
+}

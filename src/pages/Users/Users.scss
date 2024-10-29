@@ -1,0 +1,11 @@
+.users {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+}
+.user-detail-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
