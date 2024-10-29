@@ -62,7 +62,7 @@ export const svgMapFiles: Record<string, any> = {
     "01JASKZCMSTMJCKW3SHWEXBB9M": tenancyScheme,
 
     // nizami mall
-    "01JBA1GQPHDNF7KE6Z22C77CVE": nizamiMall3,
-    "01JBA1GQPHDNF7KE6Z22C77CVF": nizamiMall2,
     "01JBA1GQPHDNF7KE6Z22C77CVG": nizamiMall1,
+    "01JBA1GQPHDNF7KE6Z22C77CVF": nizamiMall2,
+    "01JBA1GQPHDNF7KE6Z22C77CVE": nizamiMall3,
 };
