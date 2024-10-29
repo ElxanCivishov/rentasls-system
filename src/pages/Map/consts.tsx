@@ -18,7 +18,6 @@ import bsm from "@/assets/map/BSM.svg";
 import industrialI from "@/assets/map/İstehsalatI.svg";
 
 import AzerbaijanHouseholdGoodsSumgayit from "@/assets/map/AzerbaijanHouseholdGoodsSumgayit.svg";
-import planirovkaI from "@/assets/map/Planirovka.svg";
 import planirovkaII from "@/assets/map/PlanirovkaI.svg";
 import TranzitstorLLC from "@/assets/map/TranzitstorLLC.svg";
 import tenancyScheme from "@/assets/map/tenancyScheme.svg";
@@ -47,8 +46,7 @@ export const svgMapFiles: Record<string, any> = {
     "01JASKZCMNQ84JA5Z6TTHK69VP": industrialI,
 
     // Planirovka
-    "01JASKZCMQ82SGDMKRDZV2JFBR": planirovkaI,
-    "01JASKZCMQ82SGDMKRDZV2JF12": planirovkaII,
+    "01JASKZCMQ82SGDMKRDZV2JFBR": planirovkaII,
 
     //elektroterm
     "01JASKZCMET6KY4488TWPG5APH": electrothermI,
