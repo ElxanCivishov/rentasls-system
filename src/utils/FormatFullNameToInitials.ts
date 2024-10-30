@@ -7,7 +7,7 @@
  * @returns {string} The initials, with the first letter of the surname and name capitalized.
  */
 
-export function formatFullNameToInitials({ name }: { name: string }) {
+export function formatFullNameToInitials({ name }: { name: string }): string {
     const initials = name?.split(" ");
     return initials.map((initial) => initial.charAt(0).toUpperCase()).join("");
 }
