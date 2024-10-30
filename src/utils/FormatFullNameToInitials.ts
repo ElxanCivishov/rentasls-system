@@ -8,6 +8,6 @@
  */
 
 export function formatFullNameToInitials({ name }: { name: string }) {
-    const initials = name.split(" ");
+    const initials = name?.split(" ");
     return initials.map((initial) => initial.charAt(0).toUpperCase()).join("");
 }
