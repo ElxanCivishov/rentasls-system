@@ -14,16 +14,21 @@ export default function CustomSwiper({ files = [] }: Readonly<{ files?: TFileDto
                 pagination={{
                     clickable: true,
                 }}
+                loop={true}
                 modules={[Pagination]}
                 className='mySwiper'
             >
-                {files.map((img) => (
-                    <SwiperSlide key={img.id}>
-                        <div className='commentCard'>
-                            <img src={`${import.meta.env.VITE_APP_SERVER_URL}${img.path}`} alt='' className='previewImage' />
-                        </div>
-                    </SwiperSlide>
-                ))}
+                {files.map((img) => {
+                    const url = import.meta.env.VITE_APP_FOLDER_URL + img.path;
+
+                    return (
+                        <SwiperSlide key={img.id}>
+                            <div className='commentCard'>
+                                <img src={url} alt='room' className='previewImage' />
+                            </div>
+                        </SwiperSlide>
+                    );
+                })}
             </Swiper>
         </div>
     );

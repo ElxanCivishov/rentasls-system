@@ -7,14 +7,14 @@ import { AxiosResponse } from "axios";
 const { accessToken: tokenKeyword } = authKeywords;
 
 export class AuthService {
-    static async loginUser(loginData: LoginRequest): Promise<ServerResponse<AuthResponse>> {
-        const response = await httpClient.post("/login", loginData);
+    static async loginUser(loginData: LoginRequest): Promise<AuthResponse> {
+        const response: AxiosResponse<AuthResponse> = await httpClient.post("/login", loginData);
         if (response.status === 200) {
             const { token } = response.data;
             localStorage.setItem(tokenKeyword, token);
         }
 
-        return response;
+        return response.data;
     }
 
     static async createUser(createUserData: CreateUserRequest): Promise<any> {

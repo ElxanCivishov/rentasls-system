@@ -28,7 +28,7 @@ export default function Login() {
     const signIn = function (e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const isValid = isFormValid({ informUser: false });
+        const isValid = isFormValid({ informUser: true });
         if (!isValid) return false;
 
         validateUserCredentials();
@@ -37,7 +37,7 @@ export default function Login() {
     const validateUserCredentials = async function () {
         const response = await AuthService.loginUser(signInDetails);
 
-        if (response.data.token) {
+        if (response.token) {
             navigate(ROUTES.DASHBOARD.LINK);
         }
     };
@@ -89,7 +89,7 @@ const formFields: Array<FormDetails> = [
         key: "password",
         placeholder: "Şifrəni qeyd edin",
         validator: "LengthValidator",
-        informUser: false,
+        informUser: true,
         minLength: 8,
     },
 ];

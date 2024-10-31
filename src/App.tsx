@@ -1,5 +1,4 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ConfigProvider as DesignConfigProvider, ThemeConfig } from "antd";
 import AzLocale from "antd/locale/az_AZ";
 import { Suspense } from "react";
@@ -19,10 +18,9 @@ function App() {
                 <DesignConfigProvider renderEmpty={CustomNoOptions} theme={antTheme} locale={AzLocale}>
                     <RouterProvider router={routes} />
 
-                    <Toaster position='bottom-center' />
+                    <Toaster position='bottom-center' toastOptions={{ duration: 4000, position: "top-right" }} />
                 </DesignConfigProvider>
             </Suspense>
-            {isDevelopment && <ReactQueryDevtools initialIsOpen={false} buttonPosition='bottom-left' />}
         </QueryClientProvider>
     );
 }
@@ -36,8 +34,6 @@ const queryClient = new QueryClient({
         },
     },
 });
-
-const isDevelopment = import.meta.env.VITE_APP_NODE_ENV === "development";
 
 const antTheme: ThemeConfig = {
     token: {
