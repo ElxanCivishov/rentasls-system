@@ -88,73 +88,61 @@ const formInfoInputs: Array<FormDetails> = [
         label: "Müəssisənin adı",
         key: "renter_name",
         type: "text",
-        maxLength: 100,
     },
 
     {
         label: "Direktor",
         key: "director",
         type: "text",
-        maxLength: 150,
     },
     {
         label: "Ümumi sahəsi kv.m:",
         key: "area",
         type: "number",
-        maxLength: 10,
     },
     {
         label: "1 kv.m dəyəri:",
         key: "price_per_square_meter",
         type: "number",
-        maxLength: 10,
     },
     {
         label: "İcra haqqının dəyəri:",
         key: "rent_amount",
         type: "number",
-        maxLength: 10,
     },
     {
         label: "Borc:",
         key: "debt",
         type: "number",
-        maxLength: 10,
     },
     {
         label: "Rəsmi ödəniş:",
         key: "official_payment",
         type: "number",
-        maxLength: 10,
     },
     {
         label: "Qeyri-rəsmi ödəniş:",
         key: "unofficial_payment",
         type: "number",
-        maxLength: 10,
     },
     {
         label: "VÖEN/FİN:",
         key: "voen_or_fin",
         type: "text",
-        maxLength: 10,
     },
     {
         label: "Kontrakt No:",
         key: "contract_number",
         type: "text",
-        maxLength: 20,
     },
     {
         label: "Məkan növü:",
         key: "type",
         type: "text",
-        maxLength: 100,
     },
     {
         label: "Svg uuid:",
         key: "key_for_svg",
         type: "text",
-        maxLength: 100,
     },
 ];
