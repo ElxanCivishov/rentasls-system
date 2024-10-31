@@ -6,7 +6,7 @@ import { TStyleComponentProps } from "./convertStyle";
 function applyElementAttributes(element: CustomSVGElement, active: boolean, setActiveRoom: Dispatch<SetStateAction<string>>, room?: TRoomDetails) {
     const { className, style, ...restProps } = element as any;
     const fill = active && element.type !== "text" ? "#3c7167" : "";
-    const empty = room && !room.number ? "empty" : "";
+    const empty = room && !room.renter_name && element.type !== "text" ? `${className ?? ""} empty` : "";
 
     const combinedClassName = active ? `${className ?? ""} active` : className || "";
 
@@ -52,9 +52,9 @@ export const RenderGroupedElements = ({ elements, activeRoom, setActiveRoom, roo
                     case "path":
                         return <path key={idx} {...commonAttributes} />;
                     case "text": {
-                        const number = room?.number || "-";
+                        const number = room?.number ?? "-";
                         return (
-                            <CustomTooltip title={room?.renter_name || "Yoxdur"}>
+                            <CustomTooltip title={room?.renter_name ?? "Yoxdur"}>
                                 <text key={idx} {...commonAttributes}>
                                     {number}
                                 </text>
