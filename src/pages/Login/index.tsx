@@ -1,4 +1,5 @@
-import { default as Logo } from "@/assets/logo.png";
+import { default as Logo } from "@/assets/logo.svg";
+import { default as icareImg } from "@/assets/icareImg.jpg";
 import { FormBuilder, FormDetails, TInputChange, TInputValidation } from "@/components/FormBuilder";
 import { useValidation } from "@/hooks/UseValidation";
 import { ROUTES } from "@/routes/consts";
@@ -44,33 +45,37 @@ export default function Login() {
 
     return (
         <div className='login-wrapper'>
-            <div className='logo-wrapper'>
-                <div className='logo'>
-                    <img src={Logo} alt='logo' />
+            <div className='leftSide'>
+                <div className='logo-wrapper'>
+                    <div className='logo'>
+                        <img src={Logo} alt='logo' />
+                    </div>
+                    <h2>İcarə sahələrinin idarə edilməsi</h2>
                 </div>
+                <form onSubmit={signIn}>
+                    <FormBuilder
+                        form={{
+                            inputs: formFields.map((item) => ({
+                                ...item,
+                                required: true,
+                                checkValidate,
+                                resetForm,
+                                setIsValid: handleValidInput,
+                            })),
+                            onChange: (details) => onInputChange(details as TInputChange),
+                            values: signInDetails,
+                            options: {},
+                        }}
+                    />
 
-                <h1>İcarələr</h1>
+                    <Button htmlType='submit' type='primary'>
+                        Daxil olun
+                    </Button>
+                </form>
             </div>
-            <form onSubmit={signIn}>
-                <FormBuilder
-                    form={{
-                        inputs: formFields.map((item) => ({
-                            ...item,
-                            required: true,
-                            checkValidate,
-                            resetForm,
-                            setIsValid: handleValidInput,
-                        })),
-                        onChange: (details) => onInputChange(details as TInputChange),
-                        values: signInDetails,
-                        options: {},
-                    }}
-                />
-
-                <Button htmlType='submit' type='primary'>
-                    Daxil olun
-                </Button>
-            </form>
+            <div className="rightSide">
+            <img src={icareImg} alt='logo' />
+            </div>
         </div>
     );
 }

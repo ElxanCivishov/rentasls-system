@@ -2,7 +2,7 @@ import { Button, Layout, Menu } from "antd";
 import { useEffect, useState } from "react";
 
 import MenuButton from "@/assets/icons/MenuButton.svg";
-import Logo from "@/assets/logo.png";
+import Logo from "@/assets/logo.svg";
 import "./CustomMenu.scss";
 
 import { APP_TITLE } from "@/models/Consts";

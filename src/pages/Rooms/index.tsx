@@ -46,7 +46,7 @@ const Rooms = () => {
 
     useEffect(() => {
         if (floors.data.length > 0) {
-            setSearchForm((prev) => ({ ...prev, floor_id: floors.data[0].id }));
+            setSearchForm((prev) => ({ ...prev, floor_id: floors.data[0].id, month: 10 }));
         }
     }, [floors]);
 
