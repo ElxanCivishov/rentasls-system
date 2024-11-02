@@ -17,4 +17,5 @@ export type TFloor = {
     building_id: string;
     name: string;
     floor_number: number;
+    building_name: string;
 };

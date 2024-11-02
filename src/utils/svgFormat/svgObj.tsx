@@ -38,7 +38,6 @@ export function svgToNestedKeyValue(svgString: string): SvgObject {
     function extractElements(element: Element, index: number): SvgElement {
         const positionKey = getPositionKey(element);
 
-        console.log("positionKey", positionKey);
 
         let uuid = `uuid${index + 1}`;
 
@@ -46,7 +45,6 @@ export function svgToNestedKeyValue(svgString: string): SvgObject {
             if (positionMap.has(positionKey)) {
                 const overlappingElement = positionMap.get(positionKey);
                 uuid = overlappingElement!.uuid;
-                console.log("overlappingElement", overlappingElement);
             }
         }
         const svgElement: SvgElement = {

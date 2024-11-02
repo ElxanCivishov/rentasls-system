@@ -25,6 +25,8 @@ const Maps = () => {
         },
     });
 
+    const buildingName = floors?.data[0]?.building_name;
+
     useEffect(() => {
         if (floors.data.length > 0) {
             setActiveFloor(activeFloor || floors.data[0].id);
@@ -63,6 +65,7 @@ const Maps = () => {
                 <Button className='default-btn' onClick={() => navigate(-1)} style={{ marginRight: "4rem" }}>
                     Geri
                 </Button>
+                <h3>{buildingName}</h3>
                 <div className='floors'>
                     {floors.data.map(({ id, name }) => (
                         <Button key={id} type={id === activeFloor ? "primary" : "default"} onClick={() => setActiveFloor(id)}>
