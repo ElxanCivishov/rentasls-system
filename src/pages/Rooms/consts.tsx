@@ -65,13 +65,13 @@ export const operationsColumns = ({
         align: "center",
         width: "60px",
     },
-    {
-        title: "Ümumi borc",
-        dataIndex: "total_debt",
-        key: "total_debt",
-        align: "center",
-        width: "60px",
-    },
+    // {
+    //     title: "Ümumi borc",
+    //     dataIndex: "total_debt",
+    //     key: "total_debt",
+    //     align: "center",
+    //     width: "60px",
+    // },
     {
         title: "Rəsmi ödəniş",
         dataIndex: "official_payment",

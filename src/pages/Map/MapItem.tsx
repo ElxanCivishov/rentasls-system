@@ -15,7 +15,7 @@ const MapItem: React.FC<{ svgData: TSvgElement; activeFloor: string | null }> = 
     const { data: rooms = { data: [] } } = useQuery({
         queryKey: ["rooms", activeFloor],
         queryFn: async () => {
-            const response = activeFloor ? await RoomsService.getAll({ companyId: company!, floor_id: activeFloor }) : null;
+            const response = activeFloor ? await RoomsService.getAll({ companyId: company!, floor_id: activeFloor, month: 10 }) : null;
             return response;
         },
         enabled: !!activeFloor,

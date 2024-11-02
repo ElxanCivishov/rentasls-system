@@ -69,7 +69,7 @@ const BuildingChart: React.FC<{ keyword: string }> = ({ keyword }) => {
                 stack: "Stack 1",
             },
             {
-                label: "Ümumi borc",
+                // label: "Ümumi borc",
                 data: buildingData.statistics.map((floor) => floor.total_debt),
                 backgroundColor: "rgba(255, 159, 64, 0.8)", // Orange
                 borderColor: "rgba(255, 159, 64, 1)",

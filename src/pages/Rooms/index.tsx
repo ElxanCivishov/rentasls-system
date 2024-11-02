@@ -46,7 +46,7 @@ const Rooms = () => {
 
     useEffect(() => {
         if (floors.data.length > 0) {
-            setSearchForm((prev) => ({ ...prev, floor_id: floors.data[0].id, month: 10 }));
+            setSearchForm((prev) => ({ ...prev, floor_id: floors.data[0].id }));
         }
     }, [floors]);
 
@@ -83,7 +83,7 @@ export default Rooms;
 const initializeRequest: TFilterRooms = {
     floor_id: "",
     year: null,
-    month: null,
+    month: 10,
 };
 
 export type RoomDetailsModalActions = "new" | "edit" | null;
