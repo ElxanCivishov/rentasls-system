@@ -16,13 +16,13 @@ function RoomInfo({
     voen_or_fin = "",
     unofficial_payment = 0,
     number = "",
-}: TRoomDetails) {
+}: Readonly<TRoomDetails>) {
     const groupedDataSource = [
         {
             group: "Otaq məlumatları",
             items: [
                 { title: "Otaq nömrəsi", count: number },
-                { title: "Müəsisə", count: renter_name },
+                { title: "Müəsisə", count: renter_name ?? "Boş otaq" },
                 { title: "Dirktor", count: director },
                 { title: "Sahə (kv.m)", count: area },
                 { title: "Otaq növü", count: type },
@@ -44,7 +44,7 @@ function RoomInfo({
             group: "Müqavilə məlumatları",
             items: [
                 { title: "VÖEN | FİN", count: voen_or_fin },
-                { title: "Müqavilə nömrəsi", count: contract?.number },
+                { title: "Müqavilə nömrəsi", className: "danger", count: contract?.number },
             ],
         },
     ];
@@ -56,15 +56,15 @@ export default RoomInfo;
 
 export const GroupedList: FC<{ groupedDataSource: GroupedListProps[] }> = ({ groupedDataSource }) => (
     <div>
-        {groupedDataSource.map((group, groupIndex) => (
-            <div key={groupIndex} style={{ marginBottom: "20px" }}>
+        {groupedDataSource.map((group) => (
+            <div key={group.group} style={{ marginBottom: "20px" }}>
                 <h4>{group.group}</h4>
 
                 <List
                     dataSource={group.items}
                     renderItem={(item) => (
                         <List.Item>
-                            {item.title}: <b>{item.count}</b>
+                            {item.title}: <b className={item?.className}>{item.count}</b>
                         </List.Item>
                     )}
                 />
@@ -78,5 +78,6 @@ type GroupedListProps = {
     items: {
         title: string;
         count: string | number | null;
+        className?: string;
     }[];
 };

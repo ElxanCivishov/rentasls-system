@@ -44,8 +44,8 @@ const showSuccessMessage = function (response: AxiosResponse) {
 
 const onResponse = (response: AxiosResponse) => {
     if (showSuccessMessage(response)) {
-        const successMessage = response.data.message;
-        successMessage && toast.success(successMessage);
+        const successMessage = response.data.message || "Uğurla icra olundu";
+        toast.success(successMessage);
     }
 
     abortControllers = abortControllers.filter((item) => item.url !== response.config.url);

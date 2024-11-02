@@ -3,7 +3,12 @@
     flex-direction: column;
     gap: 0.5rem;
     width: 100%;
-    height: 100%;
+    padding: 1rem 1rem 2rem;
+    height: max-content;
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 25px 0px rgba(42, 35, 67, 0.07);
+    -webkit-box-shadow: 0px 4px 25px 0px rgba(42, 35, 67, 0.07);
+    -moz-box-shadow: 0px 4px 25px 0px rgba(42, 35, 67, 0);
 
     h3{
         border-bottom: 1px solid var(--main);
@@ -14,6 +19,7 @@
     .floors {
         display: flex;
         gap: 1rem;
+        margin-bottom: 0.5rem;
         button {
             width: max-content;
             height: max-content;
@@ -60,6 +66,7 @@
         display: flex;
         gap: 1rem;
         width: 100%;
+        margin-bottom: 1rem;
 
         .svg {
             width: 100%;
