@@ -44,7 +44,7 @@ function RoomInfo({
             group: "Müqavilə məlumatları",
             items: [
                 { title: "VÖEN | FİN", count: voen_or_fin },
-                { title: "Müqavilə nömrəsi", className: "danger", count: contract?.number },
+                { title: "Müqavilə nömrəsi", className: "", count: contract?.number },
             ],
         },
     ];
