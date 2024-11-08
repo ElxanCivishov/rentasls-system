@@ -1,58 +1,60 @@
+import { TStatistics } from "@/service/StatisticsService";
 import { List } from "antd";
 
 function StatisticsTextList({
-    areaEmpty,
-    totalArea,
-    areaForRent,
-    emptyRooms,
-    roomsForRent,
-    totalDebtAggregate,
-    totalOfficialPayment,
-    totalRooms,
-    totalUnofficialPayment,
-}: StatisticsListProps) {
+    total_area_of_rooms,
+    area_of_empty_rooms,
+    area_of_rooms_for_rent,
+    number_of_empty_rooms,
+    number_of_rooms_for_rent,
+    total_cost_of_rent,
+    total_debt,
+    total_number_of_rooms,
+    total_official_payment,
+    total_unofficial_payment,
+}: TStatistics) {
     return (
         <List
             dataSource={[
                 {
                     title: "Ümumi otaq sayı",
-                    count: totalRooms,
+                    count: total_number_of_rooms,
                 },
                 {
                     title: "Boş otaq sayı",
-                    count: emptyRooms,
+                    count: number_of_empty_rooms,
                 },
                 {
                     title: "Kirayə verilən otaq sayı",
-                    count: roomsForRent,
+                    count: number_of_rooms_for_rent,
                 },
                 {
                     title: "Ümumi sahə (kv.m)",
-                    count: totalArea,
+                    count: total_area_of_rooms,
                 },
                 {
                     title: "Boş sahə (kv.m)",
-                    count: areaEmpty,
+                    count: area_of_empty_rooms,
                 },
                 {
                     title: "Kirayə verilən sahə (kv.m)",
-                    count: areaForRent,
-                },
-                {
-                    title: "Cəmi borc",
-                    count: totalDebtAggregate.toFixed(4) + " AZN",
+                    count: area_of_rooms_for_rent,
                 },
                 {
                     title: "Rəsmi ödəniş",
-                    count: totalOfficialPayment.toFixed(4) + " AZN",
+                    count: total_official_payment.toFixed(4) + " AZN",
                 },
                 {
                     title: "Q-rəsmi ödəniş",
-                    count: totalUnofficialPayment.toFixed(4) + " AZN",
+                    count: total_unofficial_payment.toFixed(4) + " AZN",
                 },
                 {
                     title: "Ümumi ödəniş",
-                    count: (totalOfficialPayment + totalUnofficialPayment).toFixed(4) + " AZN",
+                    count: total_cost_of_rent.toFixed(4) + " AZN",
+                },
+                {
+                    title: "Borc",
+                    count: total_debt.toFixed(4) + " AZN",
                 },
             ]}
             renderItem={(item) => (
@@ -65,15 +67,3 @@ function StatisticsTextList({
 }
 
 export default StatisticsTextList;
-
-export type StatisticsListProps = {
-    totalRooms: number;
-    emptyRooms: number;
-    roomsForRent: number;
-    totalArea: number;
-    areaEmpty: number;
-    areaForRent: number;
-    totalOfficialPayment: number;
-    totalUnofficialPayment: number;
-    totalDebtAggregate: number;
-};

@@ -1,4 +1,8 @@
 .statistics-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
     @media (max-width: 550px) {
         .bar-chart-wrapper {
             display: none;

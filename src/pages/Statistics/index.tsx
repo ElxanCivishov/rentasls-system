@@ -1,36 +1,34 @@
-import { Button, Segmented } from "antd";
-import { useState } from "react";
+import { Loading } from "@/components/CustomLoading";
+import { BuildingsService } from "@/service/BuildingsService";
+import { useQuery } from "@tanstack/react-query";
+import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import { buildings } from "../Buildings/consts";
-import AllBuildingsChart from "./AllBuildingsChart";
 import BuildingChart from "./BuildingChart";
 import "./Statistics.scss";
-import TotalStatisticsChart from "./TotalStatisticsChart";
-
-const tabOptions = ["Ümumi", "Binalar"];
 
 const Statistics = () => {
     const navigate = useNavigate();
-    const [selectedTab, setSelectedTab] = useState<string | number>(tabOptions[0]);
 
-    return (
+    const { data = { data: [] }, isLoading } = useQuery({
+        queryKey: ["buildings-list"],
+        queryFn: async () => {
+            const response = await BuildingsService.getAll();
+            return response;
+        },
+    });
+
+    return isLoading ? (
+        <Loading />
+    ) : (
         <div className='flex-column gap-1 w-full'>
             <div className='flex gap-1 justify-between'>
                 <Button className='default-btn' onClick={() => navigate(-1)}>
                     Geri
                 </Button>
-
-                <Segmented options={tabOptions} type='number' value={selectedTab} onChange={setSelectedTab} />
             </div>
-
-            {selectedTab === tabOptions[1] ? (
-                buildings.map(({ keyword, id }) => <BuildingChart keyword={keyword} key={id} />)
-            ) : (
-                <>
-                    <AllBuildingsChart />
-                    <TotalStatisticsChart />
-                </>
-            )}
+            {data.data.map(({ company_id, id }) => (
+                <BuildingChart company_id={company_id} key={id} />
+            ))}
         </div>
     );
 };

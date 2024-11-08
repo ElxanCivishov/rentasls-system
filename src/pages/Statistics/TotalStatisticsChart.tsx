@@ -2,7 +2,6 @@ import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title
 import React from "react";
 import { Bar } from "react-chartjs-2";
 import { buildings } from "../Buildings/consts";
-import StatisticsTextList from "./StatisticsList";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -60,7 +59,7 @@ const TotalStatisticsChart: React.FC = () => {
     return (
         <div className='bar-chart'>
             <Bar data={totalStatsData} options={totalStatsOptions} height='30px' width='100%' />
-            <StatisticsTextList {...totalStatistics} />
+            {/* <StatisticsTextList {...totalStatistics} /> */}
         </div>
     );
 };

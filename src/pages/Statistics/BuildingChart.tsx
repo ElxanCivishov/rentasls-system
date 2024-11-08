@@ -1,28 +1,36 @@
+import { Loading } from "@/components/CustomLoading";
+import { StatisticsService, TStatistics } from "@/service/StatisticsService";
+import { useQuery } from "@tanstack/react-query";
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from "chart.js";
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import { buildings, TMockBuilding } from "../Buildings/consts";
 import "./Statistics.scss";
 import StatisticsTextList from "./StatisticsList";
 
-// Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BuildingChart: React.FC<{ keyword: string }> = ({ keyword }) => {
-    const buildingData = buildings[0];
+const BuildingChart: React.FC<{ company_id: string }> = ({ company_id }) => {
+    const { data: statisticsData, isLoading } = useQuery({
+        queryKey: ["buildings-chart", company_id],
+        queryFn: async () => await StatisticsService.getById(company_id),
+    });
 
-    if (!buildingData) {
-        return <div>Açar sözə uyğun bina məlumatları tapılmadı: {keyword}</div>;
+    if (isLoading) return <Loading />;
+
+    const statistics = statisticsData?.data;
+
+    if (!statistics) {
+        return <div>Açar sözə uyğun bina məlumatları tapılmadı: {company_id}</div>;
     }
 
-    const labels = buildingData.statistics.map((floor) => floor.name);
+    const labels = statistics.floors?.map((floor) => floor.floor_name);
 
     const data = {
         labels: labels,
         datasets: [
             {
                 label: "Otaq sayı",
-                data: buildingData.statistics.map((floor) => floor.countOfRooms),
+                data: statistics?.floors?.map((floor) => floor.total_number_of_rooms),
                 backgroundColor: "rgba(54, 162, 235, 0.8)", // Blue
                 borderColor: "rgba(54, 162, 235, 1)",
                 borderWidth: 1,
@@ -30,7 +38,7 @@ const BuildingChart: React.FC<{ keyword: string }> = ({ keyword }) => {
             },
             {
                 label: "Boş otaqlar",
-                data: buildingData.statistics.map((floor) => floor.emptyRooms),
+                data: statistics?.floors?.map((floor) => floor.number_of_empty_rooms),
                 backgroundColor: "rgba(255, 99, 132, 0.8)", // Red
                 borderColor: "rgba(255, 99, 132, 1)",
                 borderWidth: 1,
@@ -38,7 +46,7 @@ const BuildingChart: React.FC<{ keyword: string }> = ({ keyword }) => {
             },
             {
                 label: "Kirayə verilən otaqlar",
-                data: buildingData.statistics.map((floor) => floor.countOfRoomsForRent),
+                data: statistics?.floors?.map((floor) => floor.number_of_rooms_for_rent),
                 backgroundColor: "rgba(75, 192, 192, 0.8)", // Teal
                 borderColor: "rgba(75, 192, 192, 1)",
                 borderWidth: 1,
@@ -46,7 +54,7 @@ const BuildingChart: React.FC<{ keyword: string }> = ({ keyword }) => {
             },
             {
                 label: "Ümumi sahə (kv.m)",
-                data: buildingData.statistics.map((floor) => floor.totalArea),
+                data: statistics?.floors?.map((floor) => floor.total_area_of_rooms),
                 backgroundColor: "rgba(255, 206, 86, 0.8)", // Yellow
                 borderColor: "rgba(255, 206, 86, 1)",
                 borderWidth: 1,
@@ -54,7 +62,7 @@ const BuildingChart: React.FC<{ keyword: string }> = ({ keyword }) => {
             },
             {
                 label: "Boş sahə (kv.m)",
-                data: buildingData.statistics.map((floor) => floor.areaEmptyRooms),
+                data: statistics?.floors?.map((floor) => floor.area_of_empty_rooms),
                 backgroundColor: "rgba(153, 102, 255, 0.8)", // Purple
                 borderColor: "rgba(153, 102, 255, 1)",
                 borderWidth: 1,
@@ -62,31 +70,31 @@ const BuildingChart: React.FC<{ keyword: string }> = ({ keyword }) => {
             },
             {
                 label: "Kirayə verilən sahə (kv.m)",
-                data: buildingData.statistics.map((floor) => floor.areaOfRoomsForRent),
+                data: statistics?.floors?.map((floor) => floor.area_of_rooms_for_rent),
                 backgroundColor: "rgba(75, 190, 130, 0.8)", // Light Green
                 borderColor: "rgba(75, 190, 130, 1)",
                 borderWidth: 1,
                 stack: "Stack 1",
             },
             {
-                // label: "Ümumi borc",
-                data: buildingData.statistics.map((floor) => floor.total_debt),
-                backgroundColor: "rgba(255, 159, 64, 0.8)", // Orange
-                borderColor: "rgba(255, 159, 64, 1)",
+                label: "Borc",
+                data: statistics?.floors?.map((floor) => floor.total_cost_of_rent),
+                backgroundColor: "rgba(220, 20, 60, 0.8)", // Crimson Red
+                borderColor: "rgba(220, 20, 60, 1)", // Crimson
                 borderWidth: 1,
                 stack: "Stack 2",
             },
             {
                 label: "Rəsmi ödəniş",
-                data: buildingData.statistics.map((floor) => floor.official_payment),
-                backgroundColor: "rgba(255, 99, 71, 0.8)", // Tomato
-                borderColor: "rgba(255, 99, 71, 1)",
+                data: statistics?.floors?.map((floor) => floor.total_official_payment),
+                backgroundColor: "rgba(0, 128, 128, 0.8)",
+                borderColor: "rgba(0, 128, 128, 1)",
                 borderWidth: 1,
                 stack: "Stack 2",
             },
             {
                 label: "Qeyri-rəsmi ödəniş",
-                data: buildingData.statistics.map((floor) => floor.unofficial_payment),
+                data: statistics?.floors?.map((floor) => floor.total_unofficial_payment),
                 backgroundColor: "rgba(201, 203, 207, 0.8)", // Light Grey
                 borderColor: "rgba(201, 203, 207, 1)",
                 borderWidth: 1,
@@ -95,39 +103,27 @@ const BuildingChart: React.FC<{ keyword: string }> = ({ keyword }) => {
         ],
     };
 
-    const totalStatistics = {
-        totalRooms: buildingData.statistics.reduce((acc, floor) => acc + floor.countOfRooms, 0),
-        emptyRooms: buildingData.statistics.reduce((acc, floor) => acc + floor.emptyRooms, 0),
-        roomsForRent: buildingData.statistics.reduce((acc, floor) => acc + floor.countOfRoomsForRent, 0),
-        totalArea: buildingData.statistics.reduce((acc, floor) => acc + floor.totalArea, 0),
-        areaEmpty: buildingData.statistics.reduce((acc, floor) => acc + floor.areaEmptyRooms, 0),
-        areaForRent: buildingData.statistics.reduce((acc, floor) => acc + floor.areaOfRoomsForRent, 0),
-        totalOfficialPayment: buildingData.statistics.reduce((acc, floor) => acc + floor.official_payment, 0),
-        totalUnofficialPayment: buildingData.statistics.reduce((acc, floor) => acc + floor.unofficial_payment, 0),
-        totalDebtAggregate: buildingData.statistics.reduce((acc, floor) => acc + floor.total_debt, 0),
-    };
-
     return (
         <div className='statistics-wrapper'>
             <div className='bar-chart-wrapper'>
                 <div className='bar-chart'>
-                    <Bar data={data} options={getOptions(buildingData)} />
+                    <Bar data={data} options={getOptions(statistics)} />
                 </div>
             </div>
-            <StatisticsTextList {...totalStatistics} />
+            <StatisticsTextList {...statistics} />
         </div>
     );
 };
 
 export default BuildingChart;
 
-const getOptions = (buildingData: TMockBuilding) => {
+const getOptions = (buildingData: TStatistics) => {
     return {
         responsive: true,
         plugins: {
             title: {
                 display: true,
-                text: `${buildingData.name} - mərtəbələr üzrə otaq və sahə statistikası`,
+                text: `${buildingData.building_name} - mərtəbələr üzrə otaq və sahə statistikası`,
             },
             tooltip: {
                 mode: "index" as const,

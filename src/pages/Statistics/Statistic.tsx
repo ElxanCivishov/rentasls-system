@@ -15,7 +15,7 @@ const Statistic = () => {
                     Geri
                 </Button>
             </div>
-            <BuildingChart keyword={company} />
+            <BuildingChart company_id={company} />
         </div>
     );
 };

@@ -2,7 +2,7 @@ import { httpClient } from "@/httpClient";
 import { AxiosResponse } from "axios";
 
 export class StatisticsService {
-    public static async getAll(companyId: string): Promise<TStatisticsResponse> {
+    public static async getById(companyId: string): Promise<TStatisticsResponse> {
         const response: AxiosResponse<TStatisticsResponse> = await httpClient.get(`/statistic`, {
             headers: { CompanyId: companyId },
         });
@@ -10,49 +10,36 @@ export class StatisticsService {
     }
 }
 
-export type TFloorStatistics = {
-    id: string;
-    keyword: string;
-    name: string;
-    countOfRooms: number;
-    emptyRooms: number;
-    countOfRoomsForRent: number;
-    areaOfRoomsForRent: number;
-    areaEmptyRooms: number;
-    totalArea: number;
+export type TStatistics = {
+    building_name: string;
+    total_number_of_rooms: number;
+    number_of_empty_rooms: number;
+    number_of_rooms_for_rent: number;
+    total_area_of_rooms: number;
+    area_of_empty_rooms: number;
+    area_of_rooms_for_rent: number;
     total_debt: number;
-    official_payment: number;
-    unofficial_payment: number;
+    total_official_payment: number;
+    total_unofficial_payment: number;
+    total_cost_of_rent: number;
+    floors?: TFloorStatistics[];
 };
 
-type TStatisticsResponse = {
-    data: {
-        totalNumberOfRooms: number;
-        numberOfEmptyRooms: number;
-        numberOfRoomsForRent: number;
-        area: {
-            total: number;
-            floor1: number;
-            floor2: number;
-            floor3: number;
-            floor4: number;
-            floor5: number;
-        };
-        debt: {
-            floor1: Record<string, number>;
-            floor2: Record<string, number>;
-            floor3: Record<string, number>;
-            floor4: Record<string, number>;
-            floor5: Record<string, number>;
-            total: Record<string, number>;
-        };
-        costOfRent: {
-            floor1: Record<string, number>;
-            floor2: Record<string, number>;
-            floor3: Record<string, number>;
-            floor4: Record<string, number>;
-            floor5: Record<string, number>;
-            total: Record<string, number>;
-        };
-    };
+export type TStatisticsResponse = {
+    data: TStatistics;
+};
+
+export type TFloorStatistics = {
+    floor_id: string;
+    total_number_of_rooms: number;
+    number_of_empty_rooms: number;
+    total_debt: number;
+    total_official_payment: number;
+    total_unofficial_payment: number;
+    total_cost_of_rent: number;
+    total_area_of_rooms: number;
+    area_of_empty_rooms: number;
+    floor_name: string;
+    number_of_rooms_for_rent: number;
+    area_of_rooms_for_rent: number;
 };

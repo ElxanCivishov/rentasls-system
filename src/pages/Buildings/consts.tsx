@@ -1,5 +1,3 @@
-import { TFloorStatistics } from "@/service/StatisticsService";
-
 export const buildings: TMockBuilding[] = [
     {
         id: 1,
@@ -330,47 +328,17 @@ export type TMockBuilding = {
     statistics: TFloorStatistics[];
 };
 
-// [
-//     {
-//         date: {
-//             "Oktyabr 2024": [
-//                 { floorId: 1, debt: 0, totalDebt: 100, total: 100 },
-//                 { floorId: 2, debt: 0, totalDebt: 100, price: 20, totalPrice: 100 },
-//                 { floorId: 3, debt: 0, totalDebt: 100, price: 20, totalPrice: 100 },
-//                 { floorId: 4, debt: 0, totalDebt: 100, price: 20, totalPrice: 100 },
-//                 { floorId: 5, debt: 0, totalDebt: 100, price: 20, totalPrice: 100 },
-//             ],
-//             "Sentyabr 2024": [{ floorId: 1, debt: 0, totalDebt: 100 }],
-//             "Avqust 2024": 0,
-//             "Iyul 2024": 0,
-//             "Iyun 2024": 0,
-//             "May 2024": 0,
-//             "Aprel 2024": 0,
-//             "Mart 2024": 0,
-//             "Fevral 2024": 0,
-//             "Yanvar 2024": 0,
-//             "Fevral 2023": 0,
-//             "Yanvar 2023": 0,
-//         },
-//         total: 100,
-//     },
-
-//     {
-//         date: {
-//             "02.2025": [
-//                 { floorId: 1, debt: 0, totalDebt: 100, total: 100 },
-//                 { floorId: 2, debt: 0, totalDebt: 100 },
-//             ],
-//             "09.2025": [{ floorId: 1, debt: 0, totalDebt: 100 }],
-//             "Avqust 2025": 0,
-//             "Iyul 2025": 0,
-//             "Iyun 2025": 0,
-//             "May 2025": 0,
-//             "Aprel 2025": 0,
-//             "Mart 2025": 0,
-//             "Fevral 2025": 0,
-//             "Yanvar 2025": 0,
-//         },
-//         total: 100,
-//     },
-// ];
+export type TFloorStatistics = {
+    id: string;
+    keyword: string;
+    name: string;
+    countOfRooms: number;
+    emptyRooms: number;
+    countOfRoomsForRent: number;
+    areaOfRoomsForRent: number;
+    areaEmptyRooms: number;
+    totalArea: number;
+    total_debt: number;
+    official_payment: number;
+    unofficial_payment: number;
+};
