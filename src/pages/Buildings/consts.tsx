@@ -1,3 +1,5 @@
+import { TBuildingTerritory } from "./BuildingTerritory";
+
 export const buildings: TMockBuilding[] = [
     {
         id: 1,
@@ -341,4 +343,12 @@ export type TFloorStatistics = {
     total_debt: number;
     official_payment: number;
     unofficial_payment: number;
+};
+
+export const territoryBuilding: TBuildingTerritory = {
+    id: "01JASKZ8X4GS8NMN5601R4Q5MK",
+    company_id: "01JASKZ8W5592RW5S0YAFDPBVT",
+    name: "Ərazi",
+    address: "Bak\u0131 \u015f\u0259h\u0259ri",
+    is_erazi: false,
 };

@@ -5,6 +5,7 @@ export const ROUTES = {
         PATH: "/",
         LINK: "/",
         ROLES: [],
+        TERRITORY: { ROUTE: "territory", LINK: "/territory", PATH: "territory", ROLES: [] },
     },
 
     STATISTICS: {

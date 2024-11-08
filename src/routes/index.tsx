@@ -25,6 +25,11 @@ export const routes = createBrowserRouter(
                     element={<PrivateRoutes Component={<Dashboard />} roles={ROUTES.DASHBOARD.ROLES} />}
                 />
                 <Route
+                    path={ROUTES.DASHBOARD.TERRITORY.ROUTE}
+                    handle={{ breadCrumb: "Ərazi" }}
+                    element={<PrivateRoutes Component={<Dashboard />} roles={ROUTES.DASHBOARD.TERRITORY.ROLES} />}
+                />
+                <Route
                     path={ROUTES.STATISTICS.ROUTE}
                     handle={{ breadCrumb: "Statistika" }}
                     element={<PrivateRoutes Component={<Statistics />} roles={ROUTES.STATISTICS.ROLES} />}
