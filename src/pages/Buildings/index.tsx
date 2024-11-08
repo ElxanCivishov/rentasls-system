@@ -1,8 +1,10 @@
 import { Loading } from "@/components/CustomLoading";
 import { useModalActions } from "@/hooks/useModalActions";
+import { useUser } from "@/hooks/useUser";
 import { ROUTES } from "@/routes/consts";
 import { BuildingsService, TBuilding } from "@/service/BuildingsService";
 import { useQuery } from "@tanstack/react-query";
+import { Button, Empty } from "antd";
 import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Building from "./Building";
@@ -10,10 +12,10 @@ import BuildingDetails from "./BuildingDetails";
 import BuildingTerritory from "./BuildingTerritory";
 import { territoryBuilding } from "./consts";
 import "./Dashboard.scss";
-import { Button } from "antd";
 
 const Dashboard = () => {
     const { pathname } = useLocation();
+    const { user } = useUser();
     const navigate = useNavigate();
     const isTerritory = pathname === ROUTES.DASHBOARD.TERRITORY.LINK;
 
@@ -34,17 +36,24 @@ const Dashboard = () => {
         return isTerritory ? isEraziTrue : isEraziFalse;
     }, [data.data, isTerritory]);
 
+    const isShowTerritoryCard = useMemo(() => user?.roles.some((role) => isTerritoryAccessRolesIds.includes(role.id)), [user?.roles]);
+
     return isLoading ? (
         <Loading />
     ) : (
         <div className='flex-column gap-1 w-full'>
-            <div>
-                <Button className='default-btn' onClick={() => navigate(-1)}>
-                    Geri
-                </Button>
-            </div>
+            {isTerritory && (
+                <div>
+                    <Button className='default-btn' onClick={() => navigate(-1)}>
+                        Geri
+                    </Button>
+                </div>
+            )}
+
+            {parsedBuildings.length === 0 && <Empty description='Məlumat tapılmadı' />}
+
             <div className='building-cards'>
-                {!isTerritory && <BuildingTerritory building={territoryBuilding} />}
+                {!isTerritory && isShowTerritoryCard && <BuildingTerritory building={territoryBuilding} />}
 
                 {parsedBuildings.map((building) => (
                     <Building key={building.id} building={building} handleOpen={handleOpen} />
@@ -57,3 +66,12 @@ const Dashboard = () => {
 
 export default Dashboard;
 export type BuildingDetailsModalActions = "edit" | null;
+
+const isTerritoryAccessRolesIds = [
+    "01JBE41MQP7W5KC57VRZRBAH24",
+    "01JBE41MQS7A53485DM1RACD03",
+    "01JBE41MR6Q2FKYJXMSSJZF3ZK",
+    "01JBE41MR8GQZZRAAY2M7F0NA0",
+    "01JBE41MR92FEK19BGTC0K3FGN",
+    "01JBE41MRBJY4ADWDQJQNVR9QZ",
+];
