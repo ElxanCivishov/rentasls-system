@@ -1,24 +1,40 @@
+import { Loading } from "@/components/CustomLoading";
+import { StatisticsService } from "@/service/StatisticsService";
+import { useQuery } from "@tanstack/react-query";
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from "chart.js";
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import { buildings } from "../Buildings/consts";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const AllBuildingsChart: React.FC = () => {
-    const allLabels = buildings.map((building) => building.name);
+    const { data, isLoading } = useQuery({
+        queryKey: ["all-buildings-data"],
+        queryFn: async () => {
+            const response = await StatisticsService.getAll();
+            return response;
+        },
+    });
 
-    const totalRooms = buildings.map((building) => building.statistics.reduce((sum, stat) => sum + stat.countOfRooms, 0));
+    if (isLoading) return <Loading />;
 
-    const emptyRooms = buildings.map((building) => building.statistics.reduce((sum, stat) => sum + stat.emptyRooms, 0));
+    const buildings = data?.data;
 
-    const roomsForRent = buildings.map((building) => building.statistics.reduce((sum, stat) => sum + stat.countOfRoomsForRent, 0));
+    if (!buildings) return;
 
-    const areaEmpty = buildings.map((building) => building.statistics.reduce((sum, stat) => sum + stat.areaEmptyRooms, 0));
+    const allLabels = buildings.map((building) => building.building_name);
 
-    const areaForRent = buildings.map((building) => building.statistics.reduce((sum, stat) => sum + stat.areaOfRoomsForRent, 0));
+    const totalRooms = buildings.map((building) => building?.floors?.reduce((sum, stat) => sum + stat.total_number_of_rooms, 0));
 
-    const totalArea = buildings.map((building) => building.statistics.reduce((sum, stat) => sum + stat.totalArea, 0));
+    const emptyRooms = buildings.map((building) => building?.floors?.reduce((sum, stat) => sum + stat.number_of_empty_rooms, 0));
+
+    const roomsForRent = buildings.map((building) => building?.floors?.reduce((sum, stat) => sum + stat.number_of_rooms_for_rent, 0));
+
+    const areaEmpty = buildings.map((building) => building?.floors?.reduce((sum, stat) => sum + stat.area_of_empty_rooms, 0));
+
+    const areaForRent = buildings.map((building) => building?.floors?.reduce((sum, stat) => sum + stat.area_of_rooms_for_rent, 0));
+
+    const totalArea = buildings.map((building) => building?.floors?.reduce((sum, stat) => sum + stat.total_area_of_rooms, 0));
 
     const allData = {
         labels: allLabels,

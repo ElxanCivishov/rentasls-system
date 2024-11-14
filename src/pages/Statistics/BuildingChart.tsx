@@ -1,6 +1,4 @@
-import { Loading } from "@/components/CustomLoading";
-import { StatisticsService, TStatistics } from "@/service/StatisticsService";
-import { useQuery } from "@tanstack/react-query";
+import { TStatistics } from "@/service/StatisticsService";
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from "chart.js";
 import React from "react";
 import { Bar } from "react-chartjs-2";
@@ -9,18 +7,9 @@ import StatisticsTextList from "./StatisticsList";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BuildingChart: React.FC<{ company_id: string }> = ({ company_id }) => {
-    const { data: statisticsData, isLoading } = useQuery({
-        queryKey: ["buildings-chart", company_id],
-        queryFn: async () => await StatisticsService.getById(company_id),
-    });
-
-    if (isLoading) return <Loading />;
-
-    const statistics = statisticsData?.data;
-
+const BuildingChart: React.FC<{ statistics?: TStatistics }> = ({ statistics }) => {
     if (!statistics) {
-        return <div>Açar sözə uyğun bina məlumatları tapılmadı: {company_id}</div>;
+        return <div>statistics məlumatları tapılmadı</div>;
     }
 
     const labels = statistics.floors?.map((floor) => floor.floor_name);

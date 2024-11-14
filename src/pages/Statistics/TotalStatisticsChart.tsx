@@ -1,37 +1,25 @@
+import { Loading } from "@/components/CustomLoading";
+import { StatisticsService } from "@/service/StatisticsService";
+import { useQuery } from "@tanstack/react-query";
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from "chart.js";
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import { buildings } from "../Buildings/consts";
+import StatisticsTextList from "./StatisticsList";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const TotalStatisticsChart: React.FC = () => {
-    const totalStatistics = buildings.reduce(
-        (acc, building) => {
-            acc.totalRooms += building.numberOfRooms;
-            acc.emptyRooms += building.emptyRooms;
-            acc.roomsForRent += building.numberOfRoomsForRent;
-            acc.areaEmpty += building.areaEmptyRooms;
-            acc.areaForRent += building.areaOfRoomsForRent;
-            acc.totalArea += building.totalArea;
-            acc.totalOfficialPayment += building.official_payment;
-            acc.totalUnofficialPayment += building.unofficial_payment;
-            acc.totalDebtAggregate += building.total_debt;
+    const { data, isLoading } = useQuery({
+        queryKey: ["total-statistics-data"],
+        queryFn: async () => {
+            const response = await StatisticsService.getTotalStatistics();
+            return response;
+        },
+    });
 
-            return acc;
-        },
-        {
-            totalRooms: 0,
-            emptyRooms: 0,
-            roomsForRent: 0,
-            areaEmpty: 0,
-            areaForRent: 0,
-            totalArea: 0,
-            totalOfficialPayment: 0,
-            totalUnofficialPayment: 0,
-            totalDebtAggregate: 0,
-        },
-    );
+    if (isLoading) return <Loading />;
+
+    const totalStatistics = data?.data;
 
     const totalStatsData = {
         labels: labels,
@@ -39,15 +27,15 @@ const TotalStatisticsChart: React.FC = () => {
             {
                 label: "Statistika",
                 data: [
-                    totalStatistics.totalRooms,
-                    totalStatistics.emptyRooms,
-                    totalStatistics.roomsForRent,
-                    totalStatistics.totalArea,
-                    totalStatistics.areaEmpty,
-                    totalStatistics.areaForRent,
-                    totalStatistics.totalOfficialPayment,
-                    totalStatistics.totalUnofficialPayment,
-                    totalStatistics.totalDebtAggregate,
+                    totalStatistics?.total_number_of_rooms,
+                    totalStatistics?.number_of_empty_rooms,
+                    totalStatistics?.number_of_rooms_for_rent,
+                    totalStatistics?.total_area_of_rooms,
+                    totalStatistics?.area_of_empty_rooms,
+                    totalStatistics?.area_of_rooms_for_rent,
+                    totalStatistics?.total_official_payment,
+                    totalStatistics?.total_unofficial_payment,
+                    totalStatistics?.total_debt,
                 ],
                 backgroundColor: colors,
                 borderColor: colors,
@@ -59,7 +47,7 @@ const TotalStatisticsChart: React.FC = () => {
     return (
         <div className='bar-chart'>
             <Bar data={totalStatsData} options={totalStatsOptions} height='30px' width='100%' />
-            {/* <StatisticsTextList {...totalStatistics} /> */}
+            <StatisticsTextList {...(totalStatistics as any)} />
         </div>
     );
 };

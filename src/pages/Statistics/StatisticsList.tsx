@@ -2,16 +2,16 @@ import { TStatistics } from "@/service/StatisticsService";
 import { List } from "antd";
 
 function StatisticsTextList({
-    total_area_of_rooms,
-    area_of_empty_rooms,
-    area_of_rooms_for_rent,
-    number_of_empty_rooms,
-    number_of_rooms_for_rent,
-    total_cost_of_rent,
-    total_debt,
-    total_number_of_rooms,
-    total_official_payment,
-    total_unofficial_payment,
+    total_area_of_rooms = 0,
+    area_of_empty_rooms = 0,
+    area_of_rooms_for_rent = 0,
+    number_of_empty_rooms = 0,
+    number_of_rooms_for_rent = 0,
+    total_cost_of_rent = 0,
+    total_debt = 0,
+    total_number_of_rooms = 0,
+    total_official_payment = 0,
+    total_unofficial_payment = 0,
 }: TStatistics) {
     return (
         <List

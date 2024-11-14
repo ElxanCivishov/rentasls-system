@@ -1,3 +1,6 @@
+import { Loading } from "@/components/CustomLoading";
+import { StatisticsService } from "@/service/StatisticsService";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import BuildingChart from "./BuildingChart";
@@ -5,6 +8,13 @@ import BuildingChart from "./BuildingChart";
 const Statistic = () => {
     const navigate = useNavigate();
     const { company } = useParams<{ company: string }>();
+
+    const { data: statisticsData, isLoading } = useQuery({
+        queryKey: ["buildings-chart", company],
+        queryFn: async () => await StatisticsService.getById(company),
+    });
+
+    if (isLoading) return <Loading />;
 
     if (!company) return <div>Açar sözə uyğun bina məlumatları tapılmadı: {company}</div>;
 
@@ -15,7 +25,7 @@ const Statistic = () => {
                     Geri
                 </Button>
             </div>
-            <BuildingChart company_id={company} />
+            <BuildingChart statistics={statisticsData?.data} />
         </div>
     );
 };
