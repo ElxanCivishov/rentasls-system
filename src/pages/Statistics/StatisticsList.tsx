@@ -12,9 +12,11 @@ function StatisticsTextList({
     total_number_of_rooms = 0,
     total_official_payment = 0,
     total_unofficial_payment = 0,
+    building_name,
 }: TStatistics) {
     return (
         <List
+            header={building_name}
             dataSource={[
                 {
                     title: "Ümumi otaq sayı",

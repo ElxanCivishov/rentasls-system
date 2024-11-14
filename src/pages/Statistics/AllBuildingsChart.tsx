@@ -92,7 +92,7 @@ const AllBuildingsChart: React.FC = () => {
 
     return (
         <div className='bar-chart'>
-            <Bar data={allData} options={allOptions} height={"30px"} width={"100%"} />
+            <Bar data={allData} options={allOptions} height={"30px"} width={"100%"} className='statistics-bar' />
         </div>
     );
 };

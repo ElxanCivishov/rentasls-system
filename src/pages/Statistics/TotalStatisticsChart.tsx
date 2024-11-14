@@ -46,7 +46,8 @@ const TotalStatisticsChart: React.FC = () => {
 
     return (
         <div className='bar-chart'>
-            <Bar data={totalStatsData} options={totalStatsOptions} height='30px' width='100%' />
+            <Bar data={totalStatsData} options={totalStatsOptions} height='30px' width='100%' className='statistics-bar' />
+            <h4>Ümumi statistika</h4>
             <StatisticsTextList {...(totalStatistics as any)} />
         </div>
     );
