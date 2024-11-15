@@ -53,7 +53,7 @@ const Dashboard = () => {
             {parsedBuildings.length === 0 && <Empty description='Məlumat tapılmadı' />}
 
             <div className='building-cards'>
-                {((!isTerritory && isShowTerritoryCard) || isAdmin) && <BuildingTerritory building={territoryBuilding} />}
+                {!isTerritory && (isShowTerritoryCard || isAdmin) && <BuildingTerritory building={territoryBuilding} />}
 
                 {parsedBuildings.map((building) => (
                     <Building key={building.id} building={building} handleOpen={handleOpen} />
