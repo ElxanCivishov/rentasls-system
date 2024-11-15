@@ -20,7 +20,7 @@ const BuildingTerritory = ({ building }: BuildingTerritoryProps) => {
                 <Meta title={name} description={address} />
                 <div className='territory-button'>
                     <CustomTooltip title='Xəritə' key='map'>
-                        <Button type='primary' onClick={() => navigate(ROUTES.DASHBOARD.TERRITORY.LINK)}>
+                        <Button type='primary' onClick={() => navigate(ROUTES.DASHBOARD.TERRITORY.LINK)} className='align-center gap-half'>
                             <FaSitemap />
                             Binalar
                         </Button>

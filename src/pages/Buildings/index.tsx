@@ -15,7 +15,7 @@ import "./Dashboard.scss";
 
 const Dashboard = () => {
     const { pathname } = useLocation();
-    const { user } = useUser();
+    const { user, isAdmin } = useUser();
     const navigate = useNavigate();
     const isTerritory = pathname === ROUTES.DASHBOARD.TERRITORY.LINK;
 
@@ -53,7 +53,7 @@ const Dashboard = () => {
             {parsedBuildings.length === 0 && <Empty description='Məlumat tapılmadı' />}
 
             <div className='building-cards'>
-                {!isTerritory && isShowTerritoryCard && <BuildingTerritory building={territoryBuilding} />}
+                {((!isTerritory && isShowTerritoryCard) || isAdmin) && <BuildingTerritory building={territoryBuilding} />}
 
                 {parsedBuildings.map((building) => (
                     <Building key={building.id} building={building} handleOpen={handleOpen} />
