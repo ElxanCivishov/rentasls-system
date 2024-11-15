@@ -44,8 +44,8 @@ const Building = ({ building, handleOpen }: BuildingProps) => {
     );
 
     const hasOperationRole = useMemo(() => {
-        const role = user?.roles.find((role) => role.building_id === id);
-        return isAdmin || role?.operation === ROLE_KEYWORDS.ALL;
+        const hasRole = user?.roles.some((role) => role.building_id === id && role.operation === ROLE_KEYWORDS.ALL);
+        return isAdmin || hasRole;
     }, [user?.roles, isAdmin, id]);
 
     return (
