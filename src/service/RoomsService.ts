@@ -1,6 +1,7 @@
 import { httpClient } from "@/httpClient";
 import { AxiosResponse } from "axios";
-import { TFileDto } from "./FileService";
+import { TBuilding } from "./BuildingsService";
+import { TFileDTO } from "./FileService";
 
 export class RoomsService {
     public static async getAll(filters: TFilterRooms): Promise<TRoomResponse> {
@@ -23,6 +24,11 @@ export class RoomsService {
 
     public static async getById({ companyId, roomId }: { companyId: string; roomId: string }): Promise<TSingleRoomResponse> {
         const response = await httpClient.get(`/rooms/${roomId}`, { headers: { CompanyId: companyId } });
+        return response.data;
+    }
+
+    public static async getBySearch(term: string) {
+        const response = await httpClient.get(`/rooms/search/main`, { params: { term } });
         return response.data;
     }
 
@@ -56,7 +62,9 @@ export type TSingleRoomResponse = {
 export type TRoomDetails = {
     id: string;
     floor_id: string;
+    handover_id: string | null;
     renter_name: string;
+    renter_phone: string;
     director: string;
     official_payment: number;
     unofficial_payment: number;
@@ -74,10 +82,12 @@ export type TRoomDetails = {
     created_at: string;
     updated_at: string;
     contract: TContract;
+    handover: THandover | null;
     key_for_room: string;
     key_for_svg: string;
     floor: TFloor;
-    files: TFileDto[];
+    files: TFileDTO[];
+    rental_dates: string[];
 };
 
 export type TContract = {
@@ -85,11 +95,22 @@ export type TContract = {
     number: string;
     created_at: string;
     updated_at: string;
+    files: TFileDTO[];
+};
+
+export type THandover = {
+    id: string;
+    number: string;
+    created_at: string;
+    updated_at: string;
+    files: TFileDTO[];
 };
 
 export type TFloor = {
     id: string;
     building_id: string;
+    building_Name: string;
+    building: TBuilding;
     name: string;
     number: number;
     created_at: string | null;
@@ -98,10 +119,14 @@ export type TFloor = {
 
 export type TRoomDetailsRequest = Partial<{
     contract_number: string;
+    contract: TContract;
     companyId: string;
+    contract_id: string;
     roomId: string;
     id: string;
     floor_id: string;
+    handover_id: string | null;
+    handover_number: string;
     director: string;
     renter_name: string | null;
     official_payment: number | null;
@@ -117,6 +142,9 @@ export type TRoomDetailsRequest = Partial<{
     key_for_room: string;
     key_for_svg?: string;
     price_per_square_meter?: number | null;
+    files: TFileDTO[];
+    contractFiles: TFileDTO[];
+    handoverFiles: TFileDTO[];
 }>;
 
 export type TUpdateRoomRequest = Partial<{

@@ -42,18 +42,27 @@ export type TBuilding = {
     created_at: string;
     updated_at: string;
     is_erazi: boolean;
+    properties: TPropertiesProps[];
 };
 
 export type TUpdateBuildingRequest = {
     name: string;
     address?: string;
-    number_of_floors?: number;
-    number_of_rooms?: number;
-    area_of_rooms?: string;
-    number_of_empty_rooms?: number;
-    area_of_empty_rooms?: number;
-    number_of_rent_rooms?: number;
-    area_of_rent_rooms?: string;
+    properties: TNewFieldProps[];
+};
+
+export type TNewFieldProps = {
+    key: string;
+    value: string;
+};
+
+export type TPropertiesProps = {
+    id: string;
+    building_id: string;
+    key: string;
+    value: string;
+    created_at: string;
+    updated_at: string;
 };
 
 export type BUILDINGS_TYPE = keyof typeof BUILDINGS;

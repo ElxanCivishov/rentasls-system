@@ -31,12 +31,12 @@ const Rooms = () => {
         isLoading,
         refetch,
     } = useQuery({
-        queryKey: ["rooms", searchForm, building, company],
+        queryKey: ["rooms", building, company, searchForm.floor_id],
         queryFn: async () => {
             const response = searchForm.floor_id ? RoomsService.getAll({ ...searchForm, companyId: company! }) : undefined;
             return response;
         },
-        enabled: !!building || !!company || !!searchForm.floor_id,
+        enabled: !!building || !!company,
     });
 
     const { mutate: deleteRoom } = useMutation({
@@ -68,6 +68,7 @@ const Rooms = () => {
                 formValues={searchForm}
                 setSearchForm={setSearchForm}
                 options={{ month: monthsOptions, year: yearOptions, floor_id: floorOptions }}
+                handleSubmit={refetch}
                 onClearHandler={() => setSearchForm((prev) => ({ ...initializeRequest, floor_id: prev.floor_id }))}
             />
 
@@ -82,7 +83,7 @@ export default Rooms;
 
 const initializeRequest: TFilterRooms = {
     floor_id: "",
-    year: null,
+    year: new Date().getFullYear(),
     month: 10,
 };
 

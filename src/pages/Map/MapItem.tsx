@@ -1,8 +1,10 @@
 import { ContentLoading } from "@/components/CustomLoading";
 import CustomSwiper from "@/components/CustomSwiper";
+import DownloadedDocumentsWrapper from "@/components/Upload/DownloadedDocumentsWrapper";
 import { RoomsService } from "@/service/RoomsService";
 import StyleComponent from "@/utils/svgFormat/convertStyle";
 import { useQuery } from "@tanstack/react-query";
+import { Card } from "antd";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { RenderGroupedElements, TSvgElement } from "../../utils/svgFormat/svgFormat";
@@ -48,9 +50,28 @@ const MapItem: React.FC<{ svgData: TSvgElement; activeFloor: string | null }> = 
                 <div className='details'>{isLoading ? <ContentLoading /> : roomDetails && <RoomInfo {...roomDetails?.data} />}</div>
             </div>
 
-            <div className='w-full'>
-                <CustomSwiper files={roomDetails?.data?.files} />
-            </div>
+            {roomDetails && (
+                <>
+                    {roomDetails?.data.contract?.files && roomDetails?.data.contract?.files?.length > 0 ? (
+                        <DownloadedDocumentsWrapper otherFiles={roomDetails?.data.contract.files} otherTitle='Kontract sənədləri' />
+                    ) : (
+                        <Card>
+                            <b>Kontrakt üçün sənədlər yüklənməyib</b>
+                        </Card>
+                    )}
+                    {roomDetails?.data.handover?.files && roomDetails?.data.handover?.files?.length > 0 ? (
+                        <DownloadedDocumentsWrapper otherFiles={roomDetails?.data.handover?.files} otherTitle='Akt sənədləri' />
+                    ) : (
+                        <Card>
+                            <b>Akt üçün sənədlər yüklənməyib</b>
+                        </Card>
+                    )}
+
+                    <div className='w-full'>
+                        <CustomSwiper files={roomDetails?.data?.files} />
+                    </div>
+                </>
+            )}
         </>
     );
 };

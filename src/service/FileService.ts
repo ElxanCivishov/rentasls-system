@@ -21,7 +21,7 @@ export class FileService {
         return response.data;
     }
 
-    public static async deleteFileById(id: string, companyId: string) {
+    public static async deleteFileById(id: string, companyId?: string) {
         const response: AxiosResponse = await httpClient.delete(`files/${id}`, { headers: { CompanyId: companyId } });
         return response;
     }
@@ -29,12 +29,12 @@ export class FileService {
 
 type TCreateFileRequest = {
     files: File[];
-    model_name: "Room";
+    model_name: string;
     model_id: string;
     companyId?: string;
 };
 
-export type TFileDto = {
+export type TFileDTO = {
     id: string;
     filename: string;
     original_filename: string;

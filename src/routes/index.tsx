@@ -1,4 +1,5 @@
 import PrivateRoutes from "@/components/PrivateRoutes";
+import Search from "@/pages/Search";
 import Layout from "@/partials/Layout";
 import { lazy } from "react";
 import { Outlet, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
@@ -24,6 +25,7 @@ export const routes = createBrowserRouter(
                     handle={{ breadCrumb: "Idarə paneli" }}
                     element={<PrivateRoutes Component={<Dashboard />} roles={ROUTES.DASHBOARD.ROLES} />}
                 />
+                <Route path={ROUTES.SEARCH.ROUTE} handle={{ breadCrumb: "Axtarış" }} element={<Search />} />
                 <Route
                     path={ROUTES.DASHBOARD.TERRITORY.ROUTE}
                     handle={{ breadCrumb: "Ərazi" }}
@@ -49,7 +51,6 @@ export const routes = createBrowserRouter(
                     handle={{ breadCrumb: "Xəritə" }}
                     element={<PrivateRoutes Component={<Maps />} roles={ROUTES.MAP.ROLES} />}
                 />
-
                 <Route
                     path={ROUTES.ROOMS.ROUTE}
                     handle={{ breadCrumb: "Otaqlar" }}

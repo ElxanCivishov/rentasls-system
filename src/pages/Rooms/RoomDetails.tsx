@@ -1,23 +1,36 @@
+import { Loading } from "@/components/CustomLoading";
 import CustomModal from "@/components/CustomModal";
 import { FormBuilder, FormDetails, TInputChange } from "@/components/FormBuilder";
-import UploadImages from "@/components/Upload/UploadImages";
+import UploadDocumentsWrapper from "@/components/Upload/UploadDocumentsWrapper";
 import { ModalActionProps } from "@/hooks/useModalActions";
 import { RoomsService, TRoomDetails, TRoomDetailsRequest } from "@/service/RoomsService";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useCallback, useEffect, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { RoomDetailsModalActions } from ".";
 import "./Rooms.scss";
 
 export default function RoomDetails({ modalState: { open, key, data }, companyId, handleClose }: DetailModalProps) {
     const queryClient = useQueryClient();
 
+    const roomId = useMemo(() => data?.id, [data]);
+
+    const { data: roomData, isLoading } = useQuery({
+        queryKey: ["room-details", roomId, companyId],
+        queryFn: async () => (roomId ? RoomsService.getById({ roomId, companyId }) : null),
+    });
+
     const [roomDetails, setRoomDetails] = useState<TRoomDetailsRequest>(initialData);
 
     useEffect(() => {
-        if (data) {
-            setRoomDetails({ ...data, contract_number: data.contract.number });
-        }
-    }, [data, companyId]);
+        if (roomData?.data)
+            setRoomDetails({
+                ...roomData.data,
+                contract_number: roomData.data.contract?.number,
+                handover_number: roomData.data.handover?.number,
+                handoverFiles: roomData.data.handover?.files,
+                contractFiles: roomData.data.contract?.files,
+            });
+    }, [roomData, companyId]);
 
     const createFormMutation = useMutation({
         mutationFn: async () => {
@@ -35,6 +48,8 @@ export default function RoomDetails({ modalState: { open, key, data }, companyId
         createFormMutation.mutateAsync();
     };
 
+    if (isLoading) return <Loading />;
+
     return (
         <CustomModal open={open && key === "edit"} onCancel={handleClose} title='Otaq məlumatları' onOk={handleSubmit} width={1300}>
             <div className='room-details-wrapper'>
@@ -43,12 +58,50 @@ export default function RoomDetails({ modalState: { open, key, data }, companyId
                         form={{
                             inputs: formInfoInputs,
                             onChange: (details) => onInputChange(details as TInputChange),
-                            values: roomDetails,
+                            values: roomDetails as any,
                             options: {},
                         }}
                     />
                 </div>
-                <UploadImages roomKey={roomDetails.id} companyId={companyId} />
+                <div className='uploads'>
+                    <UploadDocumentsWrapper
+                        title='Otaq şəkilləri'
+                        uploadedFiles={roomDetails.files}
+                        setUploadedFiles={(files) => onInputChange({ key: "appFiles", value: files })}
+                        roomKey={roomDetails.id}
+                        companyId={companyId}
+                    />
+
+                    {roomDetails.contract_id ? (
+                        <UploadDocumentsWrapper
+                            title='Müqavilə sənədləri'
+                            uploadedFiles={roomDetails.contractFiles}
+                            setUploadedFiles={(files) => onInputChange({ key: "contractFiles", value: files })}
+                            roomKey={roomDetails.contract_id}
+                            companyId={companyId}
+                            modelName='Contract'
+                        />
+                    ) : (
+                        <div>
+                            <span>Müqavilə sənədlərinin yüklənməsi üçün daha əvvəl müqavilə yaradılmalıdır</span>
+                        </div>
+                    )}
+
+                    {roomDetails.handover_id ? (
+                        <UploadDocumentsWrapper
+                            title='Akt sənədləri'
+                            uploadedFiles={roomDetails.handoverFiles}
+                            setUploadedFiles={(files) => onInputChange({ key: "handoverFiles", value: files })}
+                            roomKey={roomDetails.handover_id ?? ""}
+                            companyId={companyId}
+                            modelName='Handover'
+                        />
+                    ) : (
+                        <div>
+                            <span>Akt sənədlərinin yüklənməsi üçün daha əvvəl akt yaradılmalıdır</span>
+                        </div>
+                    )}
+                </div>
             </div>
         </CustomModal>
     );
@@ -75,6 +128,9 @@ const initialData: TRoomDetailsRequest = {
     roomId: "",
     companyId: "",
     key_for_svg: "",
+    files: [],
+    contractFiles: [],
+    handoverFiles: [],
 };
 
 const formInfoInputs: Array<FormDetails> = [
@@ -93,6 +149,11 @@ const formInfoInputs: Array<FormDetails> = [
     {
         label: "Direktor",
         key: "director",
+        type: "text",
+    },
+    {
+        label: "Tel",
+        key: "renter_phone",
         type: "text",
     },
     {
@@ -136,8 +197,23 @@ const formInfoInputs: Array<FormDetails> = [
         type: "text",
     },
     {
+        label: "Akt No:",
+        key: "handover_number",
+        type: "text",
+    },
+    {
         label: "Məkan növü:",
         key: "type",
+        type: "text",
+    },
+    {
+        label: "Status",
+        key: "status",
+        type: "text",
+    },
+    {
+        label: "Destination",
+        key: "destination",
         type: "text",
     },
     {

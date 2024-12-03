@@ -36,6 +36,13 @@ export const ROUTES = {
         ROLES: [],
     },
 
+    SEARCH: {
+        PATH: "search",
+        ROUTE: "search",
+        LINK: "/search/",
+        ROLES: [],
+    },
+
     AUTH: {
         PATH: "auth",
         ROUTE: "auth",

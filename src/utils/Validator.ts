@@ -1,3 +1,4 @@
+import { DEFAULT_NOT_ACCEPTED_FILES, DEFAULT_UPLOAD_FILE_MAX_SIZE } from "@/models/Upload";
 import dayjs, { Dayjs } from "dayjs";
 import toast from "react-hot-toast";
 import { SHOW_DATE_FORMAT } from "./FormatDate";
@@ -285,6 +286,35 @@ export abstract class DateRangeValidator {
 
         if (customRule && !customRule(start, end)) {
             return showError(customErrorMessage || "Seçilmiş tarixlər xüsusi qaydalara uyğun deyil.");
+        }
+
+        return true;
+    }
+}
+
+export class FileValidator {
+    static validate(
+        file: File | null,
+        acceptedFiles: string[] = DEFAULT_NOT_ACCEPTED_FILES,
+        maxSize: number = DEFAULT_UPLOAD_FILE_MAX_SIZE,
+    ): boolean {
+        if (!file) {
+            toast.error("Fayl daxil edilməlidir!");
+            return false;
+        }
+
+        const isValidType = !acceptedFiles.some((acceptedType) =>
+            acceptedType.includes("*") ? file.type.startsWith(acceptedType.split("/")[0]) : file.type === acceptedType,
+        );
+
+        if (!isValidType) {
+            toast.error("Fayl tipi düzgün deyil!");
+            return false;
+        }
+
+        if (file.size > maxSize) {
+            toast.error(`Fayl ölçüsü ${maxSize / (1024 * 1024)}MB-dan böyük ola bilməz!`);
+            return false;
         }
 
         return true;

@@ -11,6 +11,7 @@ import { FaChartSimple } from "react-icons/fa6";
 import { MdDoorSliding } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { BuildingDetailsModalActions } from ".";
+import "./Dashboard.scss";
 
 type BuildingProps = {
     building: TBuilding;
@@ -22,19 +23,7 @@ const Building = ({ building, handleOpen }: BuildingProps) => {
 
     const { user, isAdmin } = useUser();
 
-    const {
-        address,
-        name,
-        number_of_empty_rooms = 0,
-        number_of_floors = 0,
-        number_of_rent_rooms = 0,
-        number_of_rooms = 0,
-        area_of_empty_rooms = 0,
-        area_of_rooms,
-        company_id,
-        area_of_rent_rooms,
-        id,
-    } = building;
+    const { address, name, company_id, id, properties } = building;
 
     const handleNavigation = useCallback(
         (path: string) => {
@@ -53,16 +42,13 @@ const Building = ({ building, handleOpen }: BuildingProps) => {
             <Card bordered={false} cover={<img alt='building' src='https://i.pinimg.com/736x/a0/a7/46/a0a746eee27dcbd84359a5557e096da7.jpg' />}>
                 <Meta title={name} description={address} />
                 <div>
-                    <p>{`Mərtəbə sayı: ${number_of_floors}`}</p>
-
-                    <Details
-                        totalRooms={number_of_rooms}
-                        numberOfRoomsForRent={number_of_rent_rooms}
-                        emptyRooms={number_of_empty_rooms}
-                        totalArea={area_of_rooms}
-                        areaOfRoomsForRent={area_of_rent_rooms}
-                        areaEmptyRooms={area_of_empty_rooms}
-                    />
+                    <div className='fields'>
+                        {properties.map((property) => (
+                            <p key={property.id}>
+                                <b>{property.key}:</b> {property.value}
+                            </p>
+                        ))}
+                    </div>
 
                     <div className='actions'>
                         <CustomTooltip title='Xəritə' key='map'>
@@ -102,43 +88,3 @@ const Building = ({ building, handleOpen }: BuildingProps) => {
 };
 
 export default Building;
-
-interface DetailsProps {
-    totalRooms: number;
-    numberOfRoomsForRent: number;
-    emptyRooms: number;
-    totalArea: string;
-    areaOfRoomsForRent: string;
-    areaEmptyRooms: number;
-}
-
-const Details: React.FC<DetailsProps> = ({ totalRooms, numberOfRoomsForRent, emptyRooms, totalArea, areaOfRoomsForRent, areaEmptyRooms }) => {
-    return (
-        <div className='statistics'>
-            <div className='description'>
-                <p>
-                    Otaq sayı: <span>{totalRooms}</span>
-                </p>
-                <p>
-                    Dolu: <span>{numberOfRoomsForRent}</span>
-                </p>
-                <p>
-                    Boş: <span>{emptyRooms}</span>
-                </p>
-            </div>
-            <div className='description'>
-                <p>
-                    Sahəsi: <span>{totalArea} kv.m</span>
-                </p>
-            </div>
-            <div className='description'>
-                <p>
-                    Dolu: <span>{areaOfRoomsForRent} kv.m</span>
-                </p>
-                <p>
-                    Boş: <span>{areaEmptyRooms} kv.m</span>
-                </p>
-            </div>
-        </div>
-    );
-};
