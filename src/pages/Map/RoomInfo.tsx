@@ -5,52 +5,37 @@ import { FC } from "react";
 function RoomInfo({
     price_per_square_meter = 0,
     area = 0,
+    destination,
+    renter_phone,
     renter_name = "",
-    renter_phone = "",
-    destination = "",
-    status = "",
     contract = { number: "", id: "", created_at: "", updated_at: "", files: [] },
-    debt = 0,
+    handover = { number: "", id: "", created_at: "", updated_at: "", files: [] },
     director = "",
-    official_payment = 0,
-    rent_amount = 0,
     type = "",
-    // total_debt = 0,
     voen_or_fin = "",
-    unofficial_payment = 0,
     number = "",
     rental_dates = [],
 }: Readonly<TRoomDetails>) {
-    const groupedDataSource = [
+    const groupedDataSource: GroupedListProps[] = [
         {
-            group: "Otaq məlumatları",
+            group: "Məlumatlar",
             items: [
-                { title: "Otaq nömrəsi", count: number },
-                { title: "Müəsisə", count: renter_name ?? "Boş otaq" },
-                { title: "Dirktor", count: director },
-                { title: "Telefon", count: renter_phone },
-                { title: "Status", count: status },
-                { title: "Destination", count: destination },
-                { title: "Sahə (kv.m)", count: area },
-                { title: "Otaq növü", count: type },
-            ],
-        },
-        {
-            group: "Ödəniş məlumatları",
-            items: [
-                { title: "1 (kv.m)", count: Number(price_per_square_meter).toFixed(2) + " AZN" },
-                { title: "Ümumi dəyəri", count: Number(rent_amount).toFixed(2) + " AZN" },
-                { title: "Borc", count: Number(debt).toFixed(2) + " AZN" },
-                { title: "Rəsmi ödəniş", count: Number(official_payment).toFixed(2) + " AZN" },
-                { title: "Q-rəsmi ödəniş", count: Number(unofficial_payment).toFixed(2) + " AZN" },
-                { title: "Ümumi ödəniş", count: (Number(official_payment) + Number(unofficial_payment)).toFixed(2) + " AZN" },
+                { title: "Növü", count: type || "—" },
+                { title: "Sahəsi (m²)", count: area || 0 },
+                { title: "1 m² dəyəri", count: Number(price_per_square_meter).toFixed(2) + " AZN" },
+                { title: "Təyinatı", count: destination || "—" },
+                { title: "Otaq nömrəsi", count: number || "—" },
+                { title: "Müəsisə", count: renter_name || "Boş otaq" },
+                { title: "Direktor", count: director || "—" },
+                { title: "Telefon", count: renter_phone || "—" },
             ],
         },
         {
             group: "Müqavilə məlumatları",
             items: [
-                { title: "VÖEN | FİN", count: voen_or_fin },
-                { title: "Müqavilə nömrəsi", className: "", count: contract?.number },
+                { title: "VÖEN | FİN", count: voen_or_fin || "—" },
+                { title: "Müqavilə nömrəsi", className: "", count: contract?.number || "—" },
+                { title: "Təhvil-təslim aktı", className: "", count: handover?.number || "—" },
             ],
         },
         {
@@ -87,7 +72,7 @@ type GroupedListProps = {
     group: string;
     items: {
         title: string;
-        count: string | number | null;
+        count: string | number | null; // Ensures compatibility with the type
         className?: string;
     }[];
 };

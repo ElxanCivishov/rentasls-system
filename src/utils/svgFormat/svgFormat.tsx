@@ -29,7 +29,7 @@ export const RenderGroupedElements = ({ elements, activeRoom, setActiveRoom, roo
     return useMemo(
         () =>
             elements.map((element, index) => {
-                const room = rooms.find((room) => room.key_for_svg.split(",").includes(element.uuid));
+                const room = rooms.find((room) => room.key_for_svg?.split(",").includes(element.uuid));
                 const active = activeRoom === room?.id;
 
                 const commonAttributes = applyElementAttributes(element, active, setActiveRoom, room);

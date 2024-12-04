@@ -36,6 +36,8 @@ const MapItem: React.FC<{ svgData: TSvgElement; activeFloor: string | null }> = 
 
     const roomsData = rooms?.data.map((room, index) => ({ ...room, uuid: `uuid${index + 10}` }));
 
+    
+
     return (
         <>
             <div className='map-details-wrapper'>
