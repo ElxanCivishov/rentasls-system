@@ -1,15 +1,13 @@
 .header {
     display: flex;
     width: 100%;
-    height: 4rem;
+    min-height: 4rem;
     justify-content: space-between;
     padding: 0.5rem 2rem;
-    box-shadow: 0px 4px 40px 0px rgba(151, 162, 183, 0.1);
     position: sticky;
     top: 0;
     background-color: white;
     border-top-left-radius: 1rem;
-    // border-top-right-radius: 1rem;
     z-index: 10;
 
     .header-right {
@@ -69,9 +67,50 @@
     .ant-tabs-nav {
         margin: 0px;
     }
+
+    @media (max-width: 750px) {
+        width: 100%;
+        min-width: 100px;
+    }
+
+    @media (max-width: 750px) {
+        .inner-search {
+            display: none;
+        }
+    }
+}
+
+.header-search {
+    min-height: 3rem;
+    padding: 0.5rem 2rem;
+    box-shadow: 0px 4px 40px 0px rgba(151, 162, 183, 0.1);
+    position: sticky;
+    top: 0;
+    background-color: white;
+    border-top-left-radius: 1rem;
+    max-width: 400px;
 }
 
 .vertical-line {
     height: 60%;
     border-right: 2px solid rgba($color: #000000, $alpha: 0.2);
+}
+
+.custom-autocomplete.ant-select {
+    min-width: 400px;
+
+    @media (max-width: 750px) {
+        width: 100%;
+        min-width: 100px;
+    }
+
+    .ant-select-selector .ant-select-selection-search .ant-select-selection-search-input {
+        padding-top: 0.2rem !important;
+    }
+}
+
+@media (min-width: 750px) {
+    .header-search {
+        display: none;
+    }
 }

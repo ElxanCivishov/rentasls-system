@@ -22,13 +22,13 @@ export class RoomsService {
         return response.data;
     }
 
-    public static async getById({ companyId, roomId }: { companyId: string; roomId: string }): Promise<TSingleRoomResponse> {
+    public static async getById({ companyId, roomId }: { companyId?: string; roomId: string }): Promise<TSingleRoomResponse> {
         const response = await httpClient.get(`/rooms/${roomId}`, { headers: { CompanyId: companyId } });
         return response.data;
     }
 
-    public static async getBySearch(term: string) {
-        const response = await httpClient.get(`/rooms/search/main`, { params: { term } });
+    public static async getBySearch(term: string): Promise<TSearchResponse> {
+        const response: AxiosResponse<TSearchResponse> = await httpClient.get(`/rooms/search`, { params: { term } });
         return response.data;
     }
 
@@ -42,6 +42,19 @@ export class RoomsService {
         return response;
     }
 }
+
+export type TSearchDTO = {
+    id: string;
+    floor_id: string;
+    director: string;
+    number: string;
+    renter_name: string;
+    floor: TFloor;
+};
+
+export type TSearchResponse = {
+    data: TSearchDTO[];
+};
 
 export type TFilterRooms = {
     companyId?: string;
@@ -65,6 +78,8 @@ export type TRoomDetails = {
     handover_id: string | null;
     renter_name: string;
     renter_phone: string;
+    destination: string;
+    status: string;
     director: string;
     official_payment: number;
     unofficial_payment: number;
@@ -109,7 +124,7 @@ export type THandover = {
 export type TFloor = {
     id: string;
     building_id: string;
-    building_Name: string;
+    building_name: string;
     building: TBuilding;
     name: string;
     number: number;

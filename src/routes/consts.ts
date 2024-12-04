@@ -37,8 +37,8 @@ export const ROUTES = {
     },
 
     SEARCH: {
-        PATH: "search",
-        ROUTE: "search",
+        PATH: "search/:search/:company",
+        ROUTE: "search/:search/:company",
         LINK: "/search/",
         ROLES: [],
     },

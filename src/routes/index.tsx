@@ -1,5 +1,5 @@
 import PrivateRoutes from "@/components/PrivateRoutes";
-import Search from "@/pages/Search";
+import Search from "@/pages/Search/Search";
 import Layout from "@/partials/Layout";
 import { lazy } from "react";
 import { Outlet, Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";

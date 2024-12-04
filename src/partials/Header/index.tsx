@@ -1,24 +1,32 @@
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { useUser } from "@/hooks/useUser";
-import { ROUTES } from "@/routes/consts";
 import AuthService from "@/service/AuthService";
 import { TUser } from "@/service/UserService";
 import { getFullName } from "@/utils/FormatFullName";
 import { formatFullNameToInitials } from "@/utils/FormatFullNameToInitials";
-import { Avatar, Button, Dropdown } from "antd";
+import { Avatar, Dropdown } from "antd";
 import { MenuProps } from "antd/lib";
-import { useNavigate } from "react-router-dom";
 import "./Header.scss";
+import Search from "./Search";
 
 export const Header = function () {
-    const navigate = useNavigate();
-
     return (
-        <header className='header'>
-            <Breadcrumb />
-            <Button onClick={() => navigate(ROUTES.SEARCH.LINK)}>Axtarış</Button>
-            <UserInfoAndActions />
-        </header>
+        <>
+            <header className='header'>
+                <div className='flex gap-1 align-center'>
+                    <Breadcrumb />
+
+                    <div className='inner-search'>
+                        <Search />
+                    </div>
+                </div>
+                <UserInfoAndActions />
+            </header>
+
+            <div className='header-search'>
+                <Search />
+            </div>
+        </>
     );
 };
 
