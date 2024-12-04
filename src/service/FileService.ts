@@ -25,6 +25,11 @@ export class FileService {
         const response: AxiosResponse = await httpClient.delete(`files/${id}`, { headers: { CompanyId: companyId } });
         return response;
     }
+
+    public static async downloadFileById(id: string) {
+        const response: AxiosResponse = await httpClient.get(`files/${id}`, { responseType: "blob" });
+        return response.data;
+    }
 }
 
 type TCreateFileRequest = {

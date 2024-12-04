@@ -46,7 +46,7 @@ export const handleDownloadAndViewFile = async ({
     action: actionType;
     setIsLoading?: Dispatch<SetStateAction<boolean>>;
 }) => {
-    const { customFilename, filename, id } = upload;
+    const { original_filename, filename, id } = upload;
 
     if (!id) {
         toast.error("Fayl tapılmadı.");
@@ -57,9 +57,9 @@ export const handleDownloadAndViewFile = async ({
     const response = await FileService.downloadFileById(id);
     if (!response?.data) return;
 
-    const fileName = customFilename ?? filename;
+    const fileName = original_filename ?? filename;
 
-    const blob = new Blob([response.data], { type: upload.contentType });
+    const blob = new Blob([response.data], { type: upload.mime_type });
     const url = window.URL.createObjectURL(blob);
 
     const link = document.createElement("a");
