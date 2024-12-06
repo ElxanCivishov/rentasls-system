@@ -14,7 +14,7 @@ export const operationsColumns = ({
     deleteRoom: (id: string) => void;
 }): ColumnType<TRoomDetails>[] => [
     {
-        title: "Otaq No",
+        title: "Nömrə",
         dataIndex: "number",
         key: "number",
         align: "center",
@@ -44,14 +44,14 @@ export const operationsColumns = ({
         align: "center",
     },
     {
-        title: "Ümumi sahə kv.m",
+        title: "Sahə m²",
         dataIndex: "area",
         key: "area",
         align: "center",
         width: "60px",
     },
     {
-        title: "1 kv.m dəyəri",
+        title: "1 m² dəyəri",
         dataIndex: "price_per_square_meter",
         key: "price_per_square_meter",
         align: "center",
@@ -119,13 +119,13 @@ export const operationsColumns = ({
         align: "center",
     },
     {
-        title: "Status",
+        title: "Vəziyyət",
         dataIndex: "status",
         key: "status",
         align: "center",
     },
     {
-        title: "Destination",
+        title: "Təyinat",
         dataIndex: "destination",
         key: "destination",
         align: "center",
@@ -159,7 +159,7 @@ export const searchFormFields: FormDetails[] = [
     { label: "Mərtəbə", type: "select", key: "floor_id" },
     { label: "İl", type: "select", key: "year" },
     { label: "Ay", type: "select", key: "month" },
-    { label: "Otaq", type: "text", key: "number" },
+    { label: "Nömrə", type: "text", key: "number" },
     { label: "Müəsisə", type: "text", key: "renter_name" },
     { label: "Director", type: "text", key: "director" },
 ];

@@ -58,10 +58,10 @@ const Building = ({ building, handleOpen }: BuildingProps) => {
                             </Button>
                         </CustomTooltip>
                         {hasOperationRole && (
-                            <CustomTooltip title='Otaqlar' key='rooms'>
+                            <CustomTooltip title='Yerlər' key='rooms'>
                                 <Button type='primary' onClick={() => handleNavigation(ROUTES.ROOMS.LINK)}>
                                     <MdDoorSliding />
-                                    Otaqlar
+                                    Yerlər
                                 </Button>
                             </CustomTooltip>
                         )}

@@ -53,6 +53,9 @@ export const handleDownloadAndViewFile = async ({
         return;
     }
 
+    console.log(id);
+    
+
     setIsLoading?.(true);
     const response = await FileService.downloadFileById(id);
     if (!response?.data) return;

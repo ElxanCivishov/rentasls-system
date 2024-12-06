@@ -40,31 +40,7 @@ const AllBuildingsChart: React.FC = () => {
         labels: allLabels,
         datasets: [
             {
-                label: "Otaq sayı",
-                data: totalRooms,
-                backgroundColor: "rgba(54, 162, 235, 0.7)",
-                borderColor: "rgba(54, 162, 235, 1)",
-                borderWidth: 1,
-                stack: "Stack 0",
-            },
-            {
-                label: "Boş otaqlar",
-                data: emptyRooms,
-                backgroundColor: "rgba(255, 99, 132, 0.7)",
-                borderColor: "rgba(255, 99, 132, 1)",
-                borderWidth: 1,
-                stack: "Stack 0",
-            },
-            {
-                label: "Kirayə verilən otaqlar",
-                data: roomsForRent,
-                backgroundColor: "rgba(75, 192, 192, 0.7)",
-                borderColor: "rgba(75, 192, 192, 1)",
-                borderWidth: 1,
-                stack: "Stack 0",
-            },
-            {
-                label: "Ümumi sahə (kv.m)",
+                label: "Ümumi sahə (m²)",
                 data: totalArea,
                 backgroundColor: "rgba(255, 206, 86, 0.7)",
                 borderColor: "rgba(255, 206, 86, 1)",
@@ -72,7 +48,32 @@ const AllBuildingsChart: React.FC = () => {
                 stack: "Stack 1",
             },
             {
-                label: "Boş sahə (kv.m)",
+                label: "Yer sayı",
+                data: totalRooms,
+                backgroundColor: "rgba(54, 162, 235, 0.7)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderWidth: 1,
+                stack: "Stack 0",
+            },
+            {
+                label: "Boş yerlər",
+                data: emptyRooms,
+                backgroundColor: "rgba(255, 99, 132, 0.7)",
+                borderColor: "rgba(255, 99, 132, 1)",
+                borderWidth: 1,
+                stack: "Stack 0",
+            },
+            {
+                label: "Kirayə verilən yerlər",
+                data: roomsForRent,
+                backgroundColor: "rgba(75, 192, 192, 0.7)",
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 1,
+                stack: "Stack 0",
+            },
+
+            {
+                label: "Boş sahə (m²)",
                 data: areaEmpty,
                 backgroundColor: "rgba(255, 159, 64, 0.7)",
                 borderColor: "rgba(255, 159, 64, 1)",
@@ -80,7 +81,7 @@ const AllBuildingsChart: React.FC = () => {
                 stack: "Stack 1",
             },
             {
-                label: "Kirayə verilən sahə (kv.m)",
+                label: "Kirayə verilən sahə (m²)",
                 data: areaForRent,
                 backgroundColor: "rgba(75, 190, 130, 0.7)",
                 borderColor: "rgba(75, 190, 130, 1)",
@@ -104,7 +105,7 @@ const allOptions = {
     plugins: {
         title: {
             display: true,
-            text: "Bütün binalar üzrə otaq və sahə statistikası",
+            text: "Bütün binalar üzrə yer və sahə statistikası",
         },
         tooltip: {
             mode: "index" as const,
@@ -132,7 +133,7 @@ const allOptions = {
             stacked: true,
             title: {
                 display: true,
-                text: "Sayı və sahəsi (kv.m)",
+                text: "Sayı və sahəsi (m²)",
                 font: { size: 18, weight: "bold" } as const,
             },
         },

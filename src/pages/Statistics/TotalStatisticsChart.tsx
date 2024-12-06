@@ -56,15 +56,12 @@ const TotalStatisticsChart: React.FC = () => {
 export default TotalStatisticsChart;
 
 const labels = [
-    "Ümumi otaq sayı",
-    "Boş otaq sayı",
-    "Kirayə verilən otaq sayı",
-    "Ümumi sahə (kv.m)",
-    "Boş sahə (kv.m)",
-    "Kirayə verilən sahə (kv.m)",
-    "Rəsmi ödəniş",
-    "Q-rəsmi ödəniş",
-    "Cəmi borc",
+    "Ümumi sahə (m²)",
+    "Ümumi yer sayı",
+    "Kirayə verilən sahə (m²)",
+    "Kirayə verilən yer sayı",
+    "Boş sahə (m²)",
+    "Boş yer sayı",
 ];
 
 const colors = [
@@ -104,7 +101,7 @@ const totalStatsOptions = {
         y: {
             title: {
                 display: true,
-                text: "Sayı / Sahə (kv.m)",
+                text: "Sayı / Sahə (m²)",
                 font: { size: 18, weight: "bold" } as const,
             },
         },

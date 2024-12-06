@@ -51,7 +51,7 @@ export default function RoomDetails({ modalState: { open, key, data }, companyId
     if (isLoading) return <Loading />;
 
     return (
-        <CustomModal open={open && key === "edit"} onCancel={handleClose} title='Otaq məlumatları' onOk={handleSubmit} width={1300}>
+        <CustomModal open={open && key === "edit"} onCancel={handleClose} title='Məlumatlar' onOk={handleSubmit} width={1300}>
             <div className='room-details-wrapper'>
                 <div className='inputs-wrapper'>
                     <FormBuilder
@@ -65,7 +65,7 @@ export default function RoomDetails({ modalState: { open, key, data }, companyId
                 </div>
                 <div className='uploads'>
                     <UploadDocumentsWrapper
-                        title='Otaq şəkilləri'
+                        title='Şəkillər'
                         uploadedFiles={roomDetails.files}
                         setUploadedFiles={(files) => onInputChange({ key: "appFiles", value: files })}
                         roomKey={roomDetails.id}
@@ -135,7 +135,7 @@ const initialData: TRoomDetailsRequest = {
 
 const formInfoInputs: Array<FormDetails> = [
     {
-        label: "Otaq no",
+        label: "Nömrə",
         key: "number",
         type: "text",
     },
@@ -157,12 +157,12 @@ const formInfoInputs: Array<FormDetails> = [
         type: "text",
     },
     {
-        label: "Ümumi sahəsi kv.m:",
+        label: "Ümumi sahəsi m²:",
         key: "area",
         type: "number",
     },
     {
-        label: "1 kv.m dəyəri:",
+        label: "1 m² dəyəri:",
         key: "price_per_square_meter",
         type: "number",
     },

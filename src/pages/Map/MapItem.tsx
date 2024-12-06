@@ -55,7 +55,7 @@ const MapItem: React.FC<{ svgData: TSvgElement; activeFloor: string | null }> = 
             {roomDetails && (
                 <>
                     {roomDetails?.data.contract?.files && roomDetails?.data.contract?.files?.length > 0 ? (
-                        <DownloadedDocumentsWrapper otherFiles={roomDetails?.data.contract.files} otherTitle='Kontract sənədləri' />
+                        <DownloadedDocumentsWrapper otherFiles={roomDetails?.data.contract.files} otherTitle='Müqavilə  sənədləri' />
                     ) : (
                         <Card>
                             <b>Kontrakt üçün sənədlər yüklənməyib</b>

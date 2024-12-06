@@ -53,7 +53,7 @@ export const routes = createBrowserRouter(
                 />
                 <Route
                     path={ROUTES.ROOMS.ROUTE}
-                    handle={{ breadCrumb: "Otaqlar" }}
+                    handle={{ breadCrumb: "Yerlər" }}
                     index
                     element={<PrivateRoutes Component={<Rooms />} roles={ROUTES.ROOMS.ROLES} />}
                 />
