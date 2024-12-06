@@ -16,12 +16,17 @@ export default function Search() {
 
         const response = await RoomsService.getBySearch(value);
 
-        const data = response.data?.map(({ id, number, director, ...rest }) => ({
-            ...rest,
-            label: `${director} (${number}) ${rest.floor.building_name}`,
-            value: `${director}(${number}) ${rest.floor.building_name}`,
-            key: id,
-        }));
+        const data =
+            response.data?.map(({ id, number, director, ...rest }) => {
+                const labelValue = formatLabelValue(director, number, rest.floor?.building_name);
+
+                return {
+                    ...rest,
+                    label: labelValue,
+                    value: labelValue,
+                    key: id,
+                };
+            }) || [];
 
         setOptions(data.length ? (data as DefaultOptionType[]) : []);
     }, 300);
@@ -49,3 +54,10 @@ export default function Search() {
         />
     );
 }
+
+const formatLabelValue = (director?: string | null, number?: string | null, buildingName?: string | null): string => {
+    const directorPart = director || "";
+    const numberPart = number ? `(${number})` : "";
+    const buildingPart = buildingName || "";
+    return `${directorPart} ${numberPart} ${buildingPart}`.trim();
+};
