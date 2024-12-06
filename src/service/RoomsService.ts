@@ -100,7 +100,7 @@ export type TRoomDetails = {
     handover: THandover | null;
     key_for_room: string;
     key_for_svg: string;
-    floor: TFloor;
+    floor?: TFloor;
     files: TFileDTO[];
     rental_dates: string[];
 };
@@ -122,14 +122,14 @@ export type THandover = {
 };
 
 export type TFloor = {
-    id: string;
-    building_id: string;
-    building_name: string;
-    building: TBuilding;
-    name: string;
-    number: number;
-    created_at: string | null;
-    updated_at: string | null;
+    id?: string;
+    building_id?: string;
+    building_name?: string;
+    building?: TBuilding;
+    name?: string;
+    number?: number;
+    created_at?: string | null;
+    updated_at?: string | null;
 };
 
 export type TRoomDetailsRequest = Partial<{

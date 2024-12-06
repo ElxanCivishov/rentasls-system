@@ -2,6 +2,33 @@ import { TRoomDetails } from "@/service/RoomsService";
 import { List } from "antd";
 import { FC } from "react";
 
+type GroupedListProps = {
+    group: string;
+    items: {
+        title: string;
+        count: string | number | null;
+        className?: string;
+    }[];
+};
+
+export const GroupedList: FC<{ groupedDataSource: GroupedListProps[] }> = ({ groupedDataSource }) => (
+    <div className='grouped-list'>
+        {groupedDataSource.map((group) => (
+            <div key={group.group} style={{ marginBottom: "20px" }}>
+                <h4>{group.group}</h4>
+                <List
+                    dataSource={group.items}
+                    renderItem={(item) => (
+                        <List.Item>
+                            {item.title ? `${item.title} : ` : ""} <b className={item?.className}>{item.count}</b>
+                        </List.Item>
+                    )}
+                />
+            </div>
+        ))}
+    </div>
+);
+
 function RoomInfo({
     price_per_square_meter = 0,
     area = 0,
@@ -10,8 +37,12 @@ function RoomInfo({
     renter_name = "",
     contract = { number: "", id: "", created_at: "", updated_at: "", files: [] },
     handover = { number: "", id: "", created_at: "", updated_at: "", files: [] },
+    floor = {
+        building_name: "",
+    },
     director = "",
     type = "",
+    status = "",
     voen_or_fin = "",
     number = "",
     rental_dates = [],
@@ -20,6 +51,7 @@ function RoomInfo({
         {
             group: "Məlumatlar",
             items: [
+                { title: "Şirkət adı", count: floor?.building_name || "—" },
                 { title: "Növü", count: type || "—" },
                 { title: "Sahəsi (m²)", count: area || 0 },
                 { title: "1 m² dəyəri", count: Number(price_per_square_meter).toFixed(2) + " AZN" },
@@ -28,6 +60,7 @@ function RoomInfo({
                 { title: "Müəsisə", count: renter_name || "Boşdur" },
                 { title: "Direktor", count: director || "—" },
                 { title: "Telefon", count: renter_phone || "—" },
+                { title: "Vəziyyəti", count: status || "—" },
             ],
         },
         {
@@ -48,31 +81,3 @@ function RoomInfo({
 }
 
 export default RoomInfo;
-
-export const GroupedList: FC<{ groupedDataSource: GroupedListProps[] }> = ({ groupedDataSource }) => (
-    <div className='grouped-list'>
-        {groupedDataSource.map((group) => (
-            <div key={group.group} style={{ marginBottom: "20px" }}>
-                <h4>{group.group}</h4>
-
-                <List
-                    dataSource={group.items}
-                    renderItem={(item) => (
-                        <List.Item>
-                            {item.title ? `${item.title} : ` : ""} <b className={item?.className}>{item.count}</b>
-                        </List.Item>
-                    )}
-                />
-            </div>
-        ))}
-    </div>
-);
-
-type GroupedListProps = {
-    group: string;
-    items: {
-        title: string;
-        count: string | number | null; // Ensures compatibility with the type
-        className?: string;
-    }[];
-};
