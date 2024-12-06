@@ -55,9 +55,14 @@ export default function Search() {
     );
 }
 
+// const formatLabelValue = (director?: string | null, number?: string | null, buildingName?: string | null): string => {
+//     const directorPart = director || "";
+//     const numberPart = number ? `(${number})` : "";
+//     const buildingPart = buildingName || "";
+//     return `${directorPart} ${numberPart} ${buildingPart}`.trim();
+// };
+
 const formatLabelValue = (director?: string | null, number?: string | null, buildingName?: string | null): string => {
-    const directorPart = director || "";
-    const numberPart = number ? `(${number})` : "";
-    const buildingPart = buildingName || "";
-    return `${directorPart} ${numberPart} ${buildingPart}`.trim();
+    const parts = [director?.trim(), number ? `No: ${number.trim()}` : "", buildingName?.trim()];
+    return parts.filter(Boolean).join(" - ");
 };
