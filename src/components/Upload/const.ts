@@ -55,11 +55,11 @@ export const handleDownloadAndViewFile = async ({
 
     setIsLoading?.(true);
     const response = await FileService.downloadFileById(id);
-    if (!response?.data) return;
+    if (!response) return;
 
     const fileName = original_filename ?? filename;
 
-    const blob = new Blob([response.data], { type: upload.mime_type });
+    const blob = new Blob([response], { type: upload.mime_type });
     const url = window.URL.createObjectURL(blob);
 
     const link = document.createElement("a");
