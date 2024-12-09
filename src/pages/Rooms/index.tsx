@@ -84,7 +84,8 @@ export default Rooms;
 const initializeRequest: TFilterRooms = {
     floor_id: "",
     year: new Date().getFullYear(),
-    month: 10,
+    month: new Date().getMonth() + 1,
 };
+
 
 export type RoomDetailsModalActions = "new" | "edit" | null;

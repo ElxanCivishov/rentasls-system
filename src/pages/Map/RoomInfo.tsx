@@ -37,9 +37,9 @@ function RoomInfo({
     renter_name = "",
     contract = { number: "", id: "", created_at: "", updated_at: "", files: [] },
     handover = { number: "", id: "", created_at: "", updated_at: "", files: [] },
-    floor = {
-        building_name: "",
-    },
+    // floor = {
+    //     building_name: "",
+    // },
     director = "",
     type = "",
     status = "",
@@ -51,7 +51,7 @@ function RoomInfo({
         {
             group: "Məlumatlar",
             items: [
-                { title: "Şirkət adı", count: floor?.building_name || "—" },
+                // { title: "Şirkət adı", count: floor?.building_name || "—" },
                 { title: "Növü", count: type || "—" },
                 { title: "Sahəsi (m²)", count: area || 0 },
                 { title: "1 m² dəyəri", count: Number(price_per_square_meter).toFixed(2) + " AZN" },
