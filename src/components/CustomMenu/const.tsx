@@ -53,7 +53,7 @@ type MenuItem = {
 
 const menus = (selectedItem: string): MenuItem[] => [
     {
-        label: <Link to={ROUTES.DASHBOARD.LINK}>Idarə paneli</Link>,
+        label: <Link to={ROUTES.DASHBOARD.LINK}>İdarə paneli</Link>,
         key: ROUTES.DASHBOARD.LINK,
         icon: (
             <div className='sidebar-icon'>
@@ -76,6 +76,15 @@ const menus = (selectedItem: string): MenuItem[] => [
         icon: (
             <div className='sidebar-icon'>
                 <UsersIcon selected={selectedItem === ROUTES.USERS.LINK} />
+            </div>
+        ),
+    },
+    {
+        label: <Link to={ROUTES.USER_MANUAL.LINK}>İstifadəçi təlimatı</Link>,
+        key: ROUTES.USER_MANUAL.LINK,
+        icon: (
+            <div className='sidebar-icon'>
+                <UsersIcon selected={selectedItem === ROUTES.USER_MANUAL.LINK} />
             </div>
         ),
     },

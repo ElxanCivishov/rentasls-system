@@ -7,7 +7,7 @@ import toast, { ToastOptions } from "react-hot-toast";
  * @returns {string} - Extracted error message from the response or a generic error message.
  */
 export const getErrorMessage = (error: AxiosError | any): string => {
-    return error?.response?.data?.message || error?.response?.data?.detail || error?.message;
+    return error?.response?.data?.message || error?.response?.data?.error || error?.message;
 };
 
 /**

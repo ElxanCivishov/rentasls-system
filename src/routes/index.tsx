@@ -7,6 +7,7 @@ import Dashboard from "../pages/Buildings";
 import { NotFound } from "../partials/NotFound";
 import { Unauthorized } from "../partials/Unauthorized";
 import { ROUTES } from "./consts";
+import UserManual from "@/pages/UserManual";
 
 export const Login = lazy(() => import("../pages/Login/index"));
 export const Statistics = lazy(() => import("../pages/Statistics"));
@@ -22,7 +23,7 @@ export const routes = createBrowserRouter(
             <Route path={ROUTES.DASHBOARD.PATH} element={<PrivateRoutes Component={<Layout />} roles={[]} />}>
                 <Route
                     path={ROUTES.DASHBOARD.PATH}
-                    handle={{ breadCrumb: "Idarə paneli" }}
+                    handle={{ breadCrumb: "İdarə paneli" }}
                     element={<PrivateRoutes Component={<Dashboard />} roles={ROUTES.DASHBOARD.ROLES} />}
                 />
                 <Route path={ROUTES.SEARCH.ROUTE} handle={{ breadCrumb: "Axtarış" }} element={<Search />} />
@@ -45,6 +46,11 @@ export const routes = createBrowserRouter(
                     path={ROUTES.USERS.PATH}
                     handle={{ breadCrumb: "İstifadəçilər" }}
                     element={<PrivateRoutes Component={<Users />} roles={ROUTES.USERS.ROLES} />}
+                />
+                  <Route
+                    path={ROUTES.USER_MANUAL.ROUTE}
+                    handle={{ breadCrumb: "İstifadəçi təlimatı" }}
+                    element={<PrivateRoutes Component={<UserManual />} roles={ROUTES.USER_MANUAL.ROLES} />}
                 />
                 <Route
                     path={ROUTES.MAP.ROUTE}

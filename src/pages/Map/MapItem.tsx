@@ -14,10 +14,12 @@ const MapItem: React.FC<{ svgData: TSvgElement; activeFloor: string | null }> = 
     const [activeRoom, setActiveRoom] = useState<string>("");
     const { company } = useParams<{ company: string }>();
 
+    const currentMonth = new Date().getMonth() + 1; 
+
     const { data: rooms = { data: [] } } = useQuery({
         queryKey: ["rooms", activeFloor],
         queryFn: async () => {
-            const response = activeFloor ? await RoomsService.getAll({ companyId: company!, floor_id: activeFloor, month: 10 }) : null;
+            const response = activeFloor ? await RoomsService.getAll({ companyId: company!, floor_id: activeFloor, month: currentMonth }) : null;
             return response;
         },
         enabled: !!activeFloor,

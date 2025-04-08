@@ -15,6 +15,12 @@ export const ROUTES = {
         ROLES: [],
         STATISTIC: { ROUTE: "statistic/:company", LINK: "/statistic/", PATH: "statistic", ROLES: [] },
     },
+    USER_MANUAL: {
+        ROUTE: "user-manual",
+        PATH: "user-manual",
+        LINK: "/user-manual",
+        ROLES: [],
+    },
 
     USERS: {
         PATH: "users",
