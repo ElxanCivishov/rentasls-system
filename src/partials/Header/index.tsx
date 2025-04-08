@@ -8,6 +8,8 @@ import { Avatar, Dropdown } from "antd";
 import { MenuProps } from "antd/lib";
 import "./Header.scss";
 import Search from "./Search";
+import { Link } from "react-router-dom";
+import pdf from "./icare.pdf";
 
 export const Header = function () {
     return (
@@ -36,6 +38,14 @@ export const UserInfoAndActions = function () {
     const items: MenuProps["items"] = [
         {
             key: "1",
+            label: (
+                    <Link to={pdf} target='_blank' rel='noopener noreferrer'>
+                        İstifadəçi təlimatı
+                    </Link>
+            ),
+        },
+        {
+            key: "2",
             label: (
                 <button className='w-full align-center' onClick={() => AuthService.logout()}>
                     Çıxış

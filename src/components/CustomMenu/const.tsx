@@ -79,15 +79,15 @@ const menus = (selectedItem: string): MenuItem[] => [
             </div>
         ),
     },
-    {
-        label: <Link to={ROUTES.USER_MANUAL.LINK}>İstifadəçi təlimatı</Link>,
-        key: ROUTES.USER_MANUAL.LINK,
-        icon: (
-            <div className='sidebar-icon'>
-                <UsersIcon selected={selectedItem === ROUTES.USER_MANUAL.LINK} />
-            </div>
-        ),
-    },
+    // {
+    //     label: <Link to={ROUTES.USER_MANUAL.LINK}>İstifadəçi təlimatı</Link>,
+    //     key: ROUTES.USER_MANUAL.LINK,
+    //     icon: (
+    //         <div className='sidebar-icon'>
+    //             <UsersIcon selected={selectedItem === ROUTES.USER_MANUAL.LINK} />
+    //         </div>
+    //     ),
+    // },
 
     {
         label: "Çıxış edin",

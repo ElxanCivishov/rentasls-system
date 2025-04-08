@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { svgMapFiles } from "./consts";
 import "./Map.scss";
 import MapItem from "./MapItem";
+    
 
 const Maps = () => {
     const navigate = useNavigate();

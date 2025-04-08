@@ -13,7 +13,7 @@ export class BuildingsService {
         buildingId,
         companyId,
         content,
-    }: {
+    }: {    
         buildingId: string;
         companyId: string;
         content: TUpdateBuildingRequest;

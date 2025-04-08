@@ -24,7 +24,7 @@ export function useUser() {
 
     const accessibleRoutes = useMemo(() => getAccessibleRoutes({ userRoles, routes: ROUTES }), [userRoles]);
 
-    const isAdmin = useMemo(() => adminEmails.includes(user?.email!), [user?.email]);
+    const isAdmin = useMemo(() => adminEmails.includes(user?.email ?? ''), [user?.email]);
     
     return { user, userRoles, accessibleRoutes, isAdmin, ...rest };
 }
