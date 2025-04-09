@@ -11,6 +11,9 @@ function useMetaTitle() {
     const matches = useMatches();
     const route = matches[matches.length - 1] as TRoute;
 
+    console.log("route", route);
+    
+
     useEffect(() => {
         const baseTitle = document.title;
         const customTitle = route.handle?.breadCrumb;

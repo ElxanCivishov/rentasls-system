@@ -10,16 +10,20 @@ import { useParams } from "react-router-dom";
 import { RenderGroupedElements, TSvgElement } from "../../utils/svgFormat/svgFormat";
 import RoomInfo from "./RoomInfo";
 
-const MapItem: React.FC<{ svgData: TSvgElement; activeFloor: string | null }> = ({ svgData, activeFloor }) => {
+const MapItem: React.FC<{ svgData: TSvgElement; activeFloor: string | null; selectedMonth: number }> = ({
+    svgData,
+    activeFloor,
+    selectedMonth,
+}) => {
     const [activeRoom, setActiveRoom] = useState<string>("");
     const { company } = useParams<{ company: string }>();
 
-    const currentMonth = new Date().getMonth() + 1; 
-
     const { data: rooms = { data: [] } } = useQuery({
-        queryKey: ["rooms", activeFloor],
+        queryKey: ["rooms", activeFloor, selectedMonth],
         queryFn: async () => {
-            const response = activeFloor ? await RoomsService.getAll({ companyId: company!, floor_id: activeFloor, month: currentMonth }) : null;
+            const response = activeFloor
+                ? await RoomsService.getAll({ companyId: company!, floor_id: activeFloor, month: selectedMonth })
+                : null;
             return response;
         },
         enabled: !!activeFloor,
@@ -38,18 +42,14 @@ const MapItem: React.FC<{ svgData: TSvgElement; activeFloor: string | null }> = 
 
     const roomsData = rooms?.data.map((room, index) => ({ ...room, uuid: `uuid${index + 10}` }));
 
-    
-
     return (
         <>
             <div className='map-details-wrapper'>
                 <div className='svg'>
-                    {/* <div className='w-full'> */}
                     <svg className='w-full pointer' {...rest}>
                         <StyleComponent style={style} />
                         <RenderGroupedElements elements={elements} setActiveRoom={setActiveRoom} activeRoom={activeRoom} rooms={roomsData} />
                     </svg>
-                    {/* </div> */}
                 </div>
                 <div className='details'>{isLoading ? <ContentLoading /> : roomDetails && <RoomInfo {...roomDetails?.data} />}</div>
             </div>
@@ -57,7 +57,7 @@ const MapItem: React.FC<{ svgData: TSvgElement; activeFloor: string | null }> = 
             {roomDetails && (
                 <>
                     {roomDetails?.data.contract?.files && roomDetails?.data.contract?.files?.length > 0 ? (
-                        <DownloadedDocumentsWrapper otherFiles={roomDetails?.data.contract.files} otherTitle='Müqavilə  sənədləri' />
+                        <DownloadedDocumentsWrapper otherFiles={roomDetails?.data.contract.files} otherTitle='Müqavilə sənədləri' />
                     ) : (
                         <Card>
                             <b>Kontrakt üçün sənədlər yüklənməyib</b>

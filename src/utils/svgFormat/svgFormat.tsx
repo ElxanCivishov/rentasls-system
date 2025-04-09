@@ -9,13 +9,13 @@ function applyElementAttributes(element: CustomSVGElement, active: boolean, setA
     const empty = room && !room.renter_name && element.type !== "text" ? `${className ?? ""} empty` : "";
 
     const combinedClassName = active ? `${className ?? ""} active` : className || "";
-
+    
     return {
         ...restProps,
         className: empty ? "empty" : combinedClassName,
         onClick: () => {
             // eslint-disable-next-line
-            console.log("elelemt", element);
+            console.log("element", element);
             room?.id && setActiveRoom(room.id);
         },
         style: {
